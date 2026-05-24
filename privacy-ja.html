@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LingoLink — プライバシーポリシー</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Meiryo", sans-serif;
+       max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.75; color: #111; }
+@media (prefers-color-scheme: dark) { body { background: #0a0a0b; color: #eee; } }
+h1 { font-size: 24px; }
+h2 { font-size: 18px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+@media (prefers-color-scheme: dark) { h2 { border-color: #333; } }
+ul { padding-left: 22px; }
+li { margin-bottom: 4px; }
+.meta { color: #888; font-size: 14px; margin-bottom: 24px; }
+.nav { margin-bottom: 24px; font-size: 14px; }
+.nav a { color: #4ea1ff; text-decoration: none; margin-right: 12px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-color: #333; } }
+th { background: rgba(0,0,0,0.04); }
+@media (prefers-color-scheme: dark) { th { background: rgba(255,255,255,0.04); } }
+</style>
+</head>
+<body>
+<p class="nav"><a href="./">← 言語選択</a> <a href="./privacy-ko.html">🇰🇷 KO</a> <a href="./privacy-vi.html">🇻🇳 VI</a> <a href="./privacy-en.html">🇺🇸 EN</a></p>
+
+<h1>LingoLink プライバシーポリシー</h1>
+<p class="meta">最終更新日: 2026年5月24日 · 施行日: 2026年5月24日</p>
+
+<p>LingoLink(以下「本アプリ」)は、ユーザーの個人情報を大切に取り扱います。本ポリシーは、本アプリがどのような情報を収集・利用・保管・送信・削除するかを透明に説明します。</p>
+
+<h2>1. 収集する個人情報</h2>
+<table>
+<tr><th>項目</th><th>収集時点</th><th>必須</th></tr>
+<tr><td>表示名(ニックネーム)</td><td>会員登録時</td><td>必須</td></tr>
+<tr><td>パスワード(PBKDF2 一方向ハッシュ)</td><td>会員登録時</td><td>必須</td></tr>
+<tr><td>国コード・電話番号</td><td>会員登録時</td><td>任意</td></tr>
+<tr><td>母語設定</td><td>会員登録時</td><td>必須</td></tr>
+<tr><td>プロフィール写真</td><td>ユーザーがアップロードした時</td><td>任意</td></tr>
+<tr><td>ステータスメッセージ</td><td>ユーザーが入力した時</td><td>任意</td></tr>
+<tr><td>プッシュ通知トークン(Expo Push Token)</td><td>通知許可時</td><td>任意</td></tr>
+<tr><td>メッセージ(原文テキスト)</td><td>メッセージ送信時</td><td>必須</td></tr>
+<tr><td>添付画像</td><td>ユーザーが添付した時</td><td>任意</td></tr>
+<tr><td>マイク録音(音声メッセージ・音声認識)</td><td>ユーザーがマイクを使用した時</td><td>任意</td></tr>
+<tr><td>学習済み音声ID(ElevenLabs voice_id)</td><td>ユーザーが自分の声を学習させた時</td><td>任意</td></tr>
+<tr><td>最終アクセス時刻</td><td>認証付きリクエスト時</td><td>必須</td></tr>
+<tr><td>二要素認証シークレット(TOTP)</td><td>ユーザーが2FAを有効化した場合のみ</td><td>任意</td></tr>
+</table>
+
+<p><strong>本アプリは以下の情報を一切収集しません:</strong></p>
+<ul>
+<li>マイナンバー、住所、決済情報などの機微個人情報</li>
+<li>広告識別子、行動追跡データ</li>
+<li>位置情報(GPS)</li>
+<li>連絡先(アドレス帳)全体のアップロード</li>
+</ul>
+
+<h2>2. 利用目的</h2>
+<ul>
+<li><strong>会員認証</strong>: 表示名とハッシュ化されたパスワードで本人確認</li>
+<li><strong>メッセージ配信と翻訳</strong>: 送信文を受信者の母語(韓・越・英・日)に自動翻訳して配信</li>
+<li><strong>音声メッセージ</strong>: 学習されたユーザー自身の声で翻訳文を音声合成し、自然な通訳体験を提供</li>
+<li><strong>プッシュ通知</strong>: 新規メッセージ受信時の通知</li>
+<li><strong>友だち管理</strong>: ブロック・通報などの安全機能</li>
+<li><strong>サービス品質改善</strong>: エラー追跡と安定性確保</li>
+</ul>
+
+<h2>3. 保有期間</h2>
+<ul>
+<li>会員情報: 退会時まで保有、退会後はすべて即時削除</li>
+<li>メッセージ: ユーザーが削除するか、退会するまで保有</li>
+<li>音声ファイル(mp3): ユーザー端末のみに保存。サーバーには音声IDのみ保存</li>
+<li>アクセスログ: 最大30日</li>
+</ul>
+
+<h2>4. 第三者提供および処理委託</h2>
+<p>本アプリは、ユーザーの同意なしに個人情報を第三者に販売・譲渡しません。ただし、サービス提供のため、以下の処理者に処理を委託します。</p>
+
+<table>
+<tr><th>受託者</th><th>委託業務</th><th>送信データ</th></tr>
+<tr><td>Anthropic, PBC (米国)</td><td>メッセージ翻訳・検証・文化ノート</td><td>メッセージ原文 + 直近8ターンの会話コンテキスト</td></tr>
+<tr><td>ElevenLabs, Inc. (米国)</td><td>音声合成および音声クローニング</td><td>学習用音声サンプル + TTSリクエストテキスト</td></tr>
+<tr><td>Cloudflare, Inc. (米国)</td><td>バックエンド基盤、データベース(D1)、ファイル保管(R2)</td><td>会員情報、メッセージ、添付画像</td></tr>
+<tr><td>Expo / Google FCM / Apple APNs</td><td>プッシュ通知の中継</td><td>プッシュトークン、通知ヘッダ</td></tr>
+<tr><td>Google LLC</td><td>Androidビルド配信および分析(Play Store)</td><td>Play Store標準データ</td></tr>
+</table>
+
+<h2>5. ユーザーの権利</h2>
+<ul>
+<li><strong>開示請求</strong>: 自身の情報の閲覧</li>
+<li><strong>訂正・削除請求</strong>: アプリ内設定で直接編集、または contact メールで請求</li>
+<li><strong>処理停止請求</strong>: アプリ内「アカウント削除」ですべての処理を即時停止</li>
+<li><strong>退会</strong>: アプリ → 設定 → アカウント → アカウント削除。もしくは contact メール</li>
+</ul>
+
+<h2>6. セキュリティ対策</h2>
+<ul>
+<li>パスワードはPBKDF2による一方向ハッシュで保存(サーバーに平文パスワードを保管しません)</li>
+<li>すべての通信はHTTPS/WSS(TLS)で暗号化</li>
+<li>二要素認証(TOTP)に対応</li>
+<li>認証トークンは端末の安全領域(Keychain/Keystore)に保管</li>
+<li>運営者でもユーザーのパスワードを知ることができません(一方向ハッシュ)</li>
+</ul>
+
+<h2>7. 子どもの個人情報</h2>
+<p>本アプリは満14歳未満のお子さまを対象としていません。14歳未満と確認されたアカウントは即時削除されます。保護者の方は、お子さまが本アプリを利用していると疑われる場合、直ちにご連絡ください。</p>
+
+<h2>8. 権限の利用について</h2>
+<table>
+<tr><th>権限</th><th>利用目的</th></tr>
+<tr><td>マイク</td><td>音声メッセージ・音声認識・自分の声の学習</td></tr>
+<tr><td>カメラ</td><td>QRコード読取・プロフィール写真撮影</td></tr>
+<tr><td>写真・メディア</td><td>チャットへの写真添付・受信した写真の保存</td></tr>
+<tr><td>通知</td><td>新規メッセージの通知</td></tr>
+<tr><td>Bluetooth</td><td>Bluetoothイヤホンを音声入力装置として使用</td></tr>
+<tr><td>ネットワーク</td><td>メッセージ送受信、翻訳サーバーとの通信</td></tr>
+</table>
+
+<h2>9. ポリシーの変更</h2>
+<p>本ポリシーが改訂される場合は、アプリ内告知または本ページで変更点をご案内します。重大な変更時はユーザーの明示的な同意を再取得します。</p>
+
+<h2>10. お問い合わせ</h2>
+<ul>
+<li>メール: <a href="mailto:zxc647632@gmail.com">zxc647632@gmail.com</a></li>
+<li>アプリパッケージ: com.lingolink.messenger</li>
+</ul>
+
+<p class="meta" style="margin-top:40px;">本ポリシーは、韓国個人情報保護法、EU GDPR、ベトナム個人情報保護関連法令、および日本の個人情報の保護に関する法律(APPI)の原則に基づいて作成されています。</p>
+
+</body>
+</html>

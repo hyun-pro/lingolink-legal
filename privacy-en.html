@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LingoLink — Privacy Policy</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.75; color: #111; }
+@media (prefers-color-scheme: dark) { body { background: #0a0a0b; color: #eee; } }
+h1 { font-size: 24px; }
+h2 { font-size: 18px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+@media (prefers-color-scheme: dark) { h2 { border-color: #333; } }
+ul { padding-left: 22px; }
+li { margin-bottom: 4px; }
+.meta { color: #888; font-size: 14px; margin-bottom: 24px; }
+.nav { margin-bottom: 24px; font-size: 14px; }
+.nav a { color: #4ea1ff; text-decoration: none; margin-right: 12px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-color: #333; } }
+th { background: rgba(0,0,0,0.04); }
+@media (prefers-color-scheme: dark) { th { background: rgba(255,255,255,0.04); } }
+</style>
+</head>
+<body>
+<p class="nav"><a href="./">← Select language</a> <a href="./privacy-ko.html">🇰🇷 KO</a> <a href="./privacy-vi.html">🇻🇳 VI</a> <a href="./privacy-ja.html">🇯🇵 JA</a></p>
+
+<h1>LingoLink Privacy Policy</h1>
+<p class="meta">Last updated: May 24, 2026 · Effective: May 24, 2026</p>
+
+<p>LingoLink ("the App") respects your privacy. This policy transparently explains what information the App collects, uses, stores, transmits, and deletes.</p>
+
+<h2>1. Information We Collect</h2>
+<table>
+<tr><th>Item</th><th>When</th><th>Required</th></tr>
+<tr><td>Display name (nickname)</td><td>At sign-up</td><td>Required</td></tr>
+<tr><td>Password (one-way PBKDF2 hash)</td><td>At sign-up</td><td>Required</td></tr>
+<tr><td>Country code · phone number</td><td>At sign-up</td><td>Optional</td></tr>
+<tr><td>Native language</td><td>At sign-up</td><td>Required</td></tr>
+<tr><td>Profile photo</td><td>When you upload one</td><td>Optional</td></tr>
+<tr><td>Status message</td><td>When you enter one</td><td>Optional</td></tr>
+<tr><td>Push notification token (Expo Push Token)</td><td>When you grant notification permission</td><td>Optional</td></tr>
+<tr><td>Messages (source text)</td><td>When you send a message</td><td>Required</td></tr>
+<tr><td>Attached images</td><td>When you attach one</td><td>Optional</td></tr>
+<tr><td>Microphone recordings (voice messages / speech recognition)</td><td>When you use the microphone</td><td>Optional</td></tr>
+<tr><td>Learned voice identifier (ElevenLabs voice_id)</td><td>When you train your own voice</td><td>Optional</td></tr>
+<tr><td>Last-seen timestamp</td><td>On each authenticated request</td><td>Required</td></tr>
+<tr><td>Two-factor secret (TOTP)</td><td>Only when you enable 2FA</td><td>Optional</td></tr>
+</table>
+
+<p><strong>The App NEVER collects:</strong></p>
+<ul>
+<li>National IDs, home addresses, payment information, or other sensitive personal data</li>
+<li>Advertising identifiers or behavioral tracking data</li>
+<li>Location (GPS)</li>
+<li>Your entire address book</li>
+</ul>
+
+<h2>2. How We Use Your Information</h2>
+<ul>
+<li><strong>Account authentication</strong>: Verify identity via display name and hashed password</li>
+<li><strong>Message delivery & translation</strong>: Automatically translate your message into the recipient's native language (KO / VI / EN / JA)</li>
+<li><strong>Voice messages</strong>: Synthesize translated text in your learned voice for a natural interpretation experience</li>
+<li><strong>Push notifications</strong>: Notify you of new messages</li>
+<li><strong>Friend management</strong>: Block / report and other safety features</li>
+<li><strong>Service quality</strong>: Error tracking and stability assurance</li>
+</ul>
+
+<h2>3. Data Retention</h2>
+<ul>
+<li>Account information: Retained until you delete your account; all related data is erased immediately upon deletion</li>
+<li>Messages: Retained until you delete them yourself or delete your account</li>
+<li>Audio files (mp3): Stored only on your device; server stores only the voice identifier</li>
+<li>Access logs: Maximum 30 days</li>
+</ul>
+
+<h2>4. Third-Party Processors</h2>
+<p>We do not sell or transfer your personal information to third parties without your consent. However, we use the following processors to deliver service:</p>
+
+<table>
+<tr><th>Processor</th><th>Purpose</th><th>Data shared</th></tr>
+<tr><td>Anthropic, PBC (USA)</td><td>Message translation, verification, cultural notes</td><td>Message text + up to 8 recent conversation turns</td></tr>
+<tr><td>ElevenLabs, Inc. (USA)</td><td>Voice synthesis and voice cloning</td><td>Training voice samples + TTS request text</td></tr>
+<tr><td>Cloudflare, Inc. (USA)</td><td>Backend infrastructure, database (D1), file storage (R2)</td><td>Account info, messages, attached images</td></tr>
+<tr><td>Expo / Google FCM / Apple APNs</td><td>Push notification relay</td><td>Push token, notification headers</td></tr>
+<tr><td>Google LLC</td><td>Android build distribution and analytics (Play Store)</td><td>Play Store standard data</td></tr>
+</table>
+
+<h2>5. Your Rights</h2>
+<ul>
+<li><strong>Right to access</strong>: View your information</li>
+<li><strong>Right to correct / delete</strong>: Edit directly in app settings, or request via contact email</li>
+<li><strong>Right to stop processing</strong>: Delete account in-app to stop all processing immediately</li>
+<li><strong>Account deletion</strong>: App → Settings → Account → Delete account. Or request via email.</li>
+</ul>
+
+<h2>6. Security Measures</h2>
+<ul>
+<li>Passwords are stored as one-way PBKDF2 hashes (raw passwords are never stored on the server)</li>
+<li>All communication is encrypted via HTTPS/WSS (TLS)</li>
+<li>Two-factor authentication (TOTP) supported</li>
+<li>Authentication tokens are stored in the device's secure storage (Keychain/Keystore)</li>
+<li>Even the operator cannot know your password (one-way hashed)</li>
+</ul>
+
+<h2>7. Children</h2>
+<p>The App is not directed to children under 14. Accounts identified as belonging to children under 14 will be deleted immediately. Parents who suspect their child has used the App should contact us immediately.</p>
+
+<h2>8. Permissions</h2>
+<table>
+<tr><th>Permission</th><th>Purpose</th></tr>
+<tr><td>Microphone</td><td>Voice messages / speech recognition / voice training</td></tr>
+<tr><td>Camera</td><td>QR code scanning / profile photos</td></tr>
+<tr><td>Photos / Media</td><td>Attach photos to chats / save received photos</td></tr>
+<tr><td>Notifications</td><td>Notify of new messages</td></tr>
+<tr><td>Bluetooth</td><td>Use Bluetooth earphones as audio input device</td></tr>
+<tr><td>Network</td><td>Send / receive messages, communicate with translation server</td></tr>
+</table>
+
+<h2>9. Policy Changes</h2>
+<p>When this policy is revised, we will notify you in-app or on this page. For material changes, we will obtain your explicit consent again.</p>
+
+<h2>10. Contact</h2>
+<ul>
+<li>Email: <a href="mailto:zxc647632@gmail.com">zxc647632@gmail.com</a></li>
+<li>App package: com.lingolink.messenger</li>
+</ul>
+
+<p class="meta" style="margin-top:40px;">This policy is drafted in alignment with the principles of South Korea's Personal Information Protection Act, the EU GDPR, Vietnam's data protection laws, and Japan's Act on the Protection of Personal Information (APPI).</p>
+
+</body>
+</html>

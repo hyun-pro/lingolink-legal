@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LingoLink — Chính sách Bảo mật</title>
+<style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.75; color: #111; }
+@media (prefers-color-scheme: dark) { body { background: #0a0a0b; color: #eee; } }
+h1 { font-size: 24px; }
+h2 { font-size: 18px; margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+@media (prefers-color-scheme: dark) { h2 { border-color: #333; } }
+ul { padding-left: 22px; }
+li { margin-bottom: 4px; }
+.meta { color: #888; font-size: 14px; margin-bottom: 24px; }
+.nav { margin-bottom: 24px; font-size: 14px; }
+.nav a { color: #4ea1ff; text-decoration: none; margin-right: 12px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-color: #333; } }
+th { background: rgba(0,0,0,0.04); }
+@media (prefers-color-scheme: dark) { th { background: rgba(255,255,255,0.04); } }
+</style>
+</head>
+<body>
+<p class="nav"><a href="./">← Chọn ngôn ngữ</a> <a href="./privacy-ko.html">🇰🇷 KO</a> <a href="./privacy-en.html">🇺🇸 EN</a> <a href="./privacy-ja.html">🇯🇵 JA</a></p>
+
+<h1>Chính sách Bảo mật LingoLink</h1>
+<p class="meta">Cập nhật lần cuối: 24/05/2026 · Có hiệu lực từ: 24/05/2026</p>
+
+<p>LingoLink ("Ứng dụng") tôn trọng quyền riêng tư của bạn. Chính sách này minh bạch về việc Ứng dụng thu thập, sử dụng, lưu trữ, truyền và xóa thông tin gì.</p>
+
+<h2>1. Thông tin chúng tôi thu thập</h2>
+<table>
+<tr><th>Mục</th><th>Khi nào</th><th>Bắt buộc</th></tr>
+<tr><td>Tên hiển thị (biệt danh)</td><td>Khi đăng ký</td><td>Bắt buộc</td></tr>
+<tr><td>Mật khẩu (băm một chiều PBKDF2)</td><td>Khi đăng ký</td><td>Bắt buộc</td></tr>
+<tr><td>Mã quốc gia · số điện thoại</td><td>Khi đăng ký</td><td>Tùy chọn</td></tr>
+<tr><td>Ngôn ngữ mẹ đẻ</td><td>Khi đăng ký</td><td>Bắt buộc</td></tr>
+<tr><td>Ảnh đại diện</td><td>Khi bạn tự tải lên</td><td>Tùy chọn</td></tr>
+<tr><td>Trạng thái cá nhân</td><td>Khi bạn tự nhập</td><td>Tùy chọn</td></tr>
+<tr><td>Token thông báo đẩy (Expo Push Token)</td><td>Khi cấp quyền thông báo</td><td>Tùy chọn</td></tr>
+<tr><td>Tin nhắn (văn bản gốc)</td><td>Khi gửi tin</td><td>Bắt buộc</td></tr>
+<tr><td>Ảnh đính kèm</td><td>Khi bạn tự đính kèm</td><td>Tùy chọn</td></tr>
+<tr><td>Ghi âm micro (tin nhắn thoại / nhận diện giọng nói)</td><td>Khi bạn dùng micro</td><td>Tùy chọn</td></tr>
+<tr><td>ID giọng nói đã học (ElevenLabs voice_id)</td><td>Khi bạn dạy giọng nói của mình</td><td>Tùy chọn</td></tr>
+<tr><td>Thời gian truy cập gần nhất</td><td>Khi gọi API có xác thực</td><td>Bắt buộc</td></tr>
+<tr><td>Mã bí mật 2FA (TOTP)</td><td>Chỉ khi bạn bật 2FA</td><td>Tùy chọn</td></tr>
+</table>
+
+<p><strong>Ứng dụng KHÔNG bao giờ thu thập:</strong></p>
+<ul>
+<li>Số CMND/CCCD, địa chỉ nhà, thông tin thanh toán hoặc dữ liệu nhạy cảm khác</li>
+<li>Mã định danh quảng cáo, dữ liệu theo dõi hành vi</li>
+<li>Vị trí (GPS)</li>
+<li>Toàn bộ danh bạ của bạn</li>
+</ul>
+
+<h2>2. Mục đích sử dụng</h2>
+<ul>
+<li><strong>Xác thực thành viên</strong>: Xác minh danh tính qua tên hiển thị và mật khẩu băm</li>
+<li><strong>Gửi tin và dịch tự động</strong>: Tự động dịch tin nhắn của bạn sang ngôn ngữ mẹ đẻ của người nhận (Hàn / Việt / Anh / Nhật)</li>
+<li><strong>Tin nhắn thoại</strong>: Tổng hợp giọng nói đã học để phát bản dịch bằng chính giọng bạn</li>
+<li><strong>Thông báo đẩy</strong>: Báo khi có tin nhắn mới</li>
+<li><strong>Quản lý bạn bè</strong>: Chặn / báo cáo và các tính năng an toàn</li>
+<li><strong>Cải thiện chất lượng</strong>: Theo dõi lỗi và đảm bảo ổn định</li>
+</ul>
+
+<h2>3. Thời gian lưu trữ</h2>
+<ul>
+<li>Thông tin tài khoản: Giữ đến khi bạn xóa tài khoản, sau đó xóa ngay toàn bộ dữ liệu liên quan</li>
+<li>Tin nhắn: Giữ đến khi bạn tự xóa hoặc xóa tài khoản</li>
+<li>Tệp âm thanh (mp3): Chỉ lưu trên thiết bị của bạn, không lưu trên máy chủ (chỉ lưu ID giọng nói)</li>
+<li>Nhật ký truy cập: Tối đa 30 ngày</li>
+</ul>
+
+<h2>4. Chia sẻ với bên thứ ba</h2>
+<p>Ứng dụng không bán hoặc chuyển giao thông tin cá nhân cho bên thứ ba khi chưa có sự đồng ý của bạn. Tuy nhiên, để cung cấp dịch vụ, chúng tôi ủy thác xử lý cho các bên sau:</p>
+
+<table>
+<tr><th>Bên xử lý</th><th>Công việc</th><th>Dữ liệu chuyển</th></tr>
+<tr><td>Anthropic, PBC (Mỹ)</td><td>Dịch / kiểm chứng / ghi chú văn hóa</td><td>Tin nhắn + 8 lượt hội thoại gần nhất</td></tr>
+<tr><td>ElevenLabs, Inc. (Mỹ)</td><td>Tổng hợp giọng nói và nhân bản giọng</td><td>Mẫu giọng để học + văn bản TTS</td></tr>
+<tr><td>Cloudflare, Inc. (Mỹ)</td><td>Hạ tầng backend, cơ sở dữ liệu (D1), lưu trữ tệp (R2)</td><td>Thông tin tài khoản, tin nhắn, ảnh đính kèm</td></tr>
+<tr><td>Expo / Google FCM / Apple APNs</td><td>Trung chuyển thông báo đẩy</td><td>Token push, header thông báo</td></tr>
+<tr><td>Google LLC</td><td>Phân phối và phân tích bản dựng Android (Play Store)</td><td>Dữ liệu chuẩn của Play Store</td></tr>
+</table>
+
+<h2>5. Quyền của bạn</h2>
+<ul>
+<li><strong>Quyền truy cập</strong>: Xem thông tin của mình</li>
+<li><strong>Quyền sửa / xóa</strong>: Sửa trực tiếp trong Cài đặt, hoặc gửi yêu cầu qua email</li>
+<li><strong>Quyền dừng xử lý</strong>: Xóa tài khoản trong ứng dụng → dừng xử lý ngay</li>
+<li><strong>Xóa tài khoản</strong>: Ứng dụng → Cài đặt → Tài khoản → Xóa tài khoản. Hoặc gửi yêu cầu qua email</li>
+</ul>
+
+<h2>6. Bảo mật dữ liệu</h2>
+<ul>
+<li>Mật khẩu được băm một chiều bằng PBKDF2 (không lưu mật khẩu gốc trên máy chủ)</li>
+<li>Mọi giao tiếp sử dụng mã hóa HTTPS/WSS (TLS)</li>
+<li>Hỗ trợ xác thực hai yếu tố (TOTP)</li>
+<li>Token xác thực được lưu trong vùng bảo mật của thiết bị (Keychain/Keystore)</li>
+<li>Ngay cả người quản trị cũng không thể biết mật khẩu của bạn</li>
+</ul>
+
+<h2>7. Trẻ em</h2>
+<p>Ứng dụng không nhắm đến trẻ em dưới 14 tuổi. Tài khoản của trẻ dưới 14 tuổi sẽ bị xóa ngay khi phát hiện. Phụ huynh nghi ngờ con sử dụng ứng dụng vui lòng liên hệ ngay.</p>
+
+<h2>8. Quyền truy cập thiết bị</h2>
+<table>
+<tr><th>Quyền</th><th>Mục đích</th></tr>
+<tr><td>Micro</td><td>Tin nhắn thoại / nhận diện giọng nói / học giọng của bạn</td></tr>
+<tr><td>Máy ảnh</td><td>Quét mã QR / chụp ảnh đại diện</td></tr>
+<tr><td>Ảnh / phương tiện</td><td>Đính kèm ảnh / lưu ảnh nhận được</td></tr>
+<tr><td>Thông báo</td><td>Báo tin nhắn mới</td></tr>
+<tr><td>Bluetooth</td><td>Dùng tai nghe Bluetooth làm thiết bị nhập âm thanh</td></tr>
+<tr><td>Mạng</td><td>Gửi / nhận tin, kết nối server dịch</td></tr>
+</table>
+
+<h2>9. Thay đổi chính sách</h2>
+<p>Khi chính sách thay đổi, chúng tôi sẽ thông báo trong ứng dụng hoặc trên trang này. Đối với thay đổi quan trọng, chúng tôi sẽ xin lại sự đồng ý của bạn.</p>
+
+<h2>10. Liên hệ</h2>
+<ul>
+<li>Email: <a href="mailto:zxc647632@gmail.com">zxc647632@gmail.com</a></li>
+<li>Gói ứng dụng: com.lingolink.messenger</li>
+</ul>
+
+<p class="meta" style="margin-top:40px;">Chính sách này được biên soạn theo các nguyên tắc của Luật Bảo vệ Thông tin Cá nhân Hàn Quốc, GDPR (EU), pháp luật bảo vệ dữ liệu cá nhân Việt Nam và Luật Bảo vệ Thông tin Cá nhân Nhật Bản (APPI).</p>
+
+</body>
+</html>
