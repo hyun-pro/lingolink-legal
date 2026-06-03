@@ -293,6 +293,57 @@
   .qa[open] summary .pl{transform:rotate(90deg)} .qa[open] summary .pl::after{opacity:0}
   .qa .ans{padding:0 22px 20px; color:var(--text-dim); font-size:15px; line-height:1.65; margin:0}
 
+  /* ---------- cross-check pipeline ---------- */
+  .pipe{display:flex; flex-wrap:wrap; gap:12px; align-items:stretch; justify-content:center; max-width:980px; margin:0 auto}
+  .pstep{flex:1 1 200px; min-width:200px; background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:20px; box-shadow:var(--shadow)}
+  .pstep .pl{font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--text-mute);
+    margin-bottom:12px; display:flex; align-items:center; gap:8px}
+  .pstep .pl .num{width:20px; height:20px; border-radius:6px; background:color-mix(in srgb,var(--brand) 14%,transparent);
+    color:var(--brand); display:grid; place-items:center; font-size:11px}
+  .pstep .ptext{font-size:15.5px; font-weight:650; letter-spacing:-.01em; line-height:1.45; display:flex; align-items:center; gap:8px}
+  .pstep .plang{font-size:12px; color:var(--text-mute); margin-top:7px}
+  .pstep.ok{background:linear-gradient(155deg,var(--grad-a),var(--grad-b)); border-color:transparent; color:#fff}
+  .pstep.ok .pl{color:rgba(255,255,255,.82)} .pstep.ok .pl .num{background:rgba(255,255,255,.22); color:#fff}
+  .pstep.ok .plang{color:rgba(255,255,255,.78)}
+  .pstep.ok .ptext svg{width:18px; height:18px; flex:none}
+  .pipe .arr{display:flex; align-items:center; color:var(--text-mute); flex:none}
+  .pipe .arr svg{width:18px; height:18px}
+  @media (max-width:760px){ .pipe{flex-direction:column} .pipe .arr{transform:rotate(90deg); align-self:center} }
+
+  /* one sentence, four languages */
+  .lia{display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:36px}
+  .lia .chip{display:inline-flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border);
+    border-radius:999px; padding:10px 18px; box-shadow:var(--shadow); font-size:15px; font-weight:600}
+  .lia .chip .fl{font-size:18px}
+  .lia .chip small{color:var(--text-mute); font-weight:500; font-size:11.5px}
+
+  /* ---------- comparison ---------- */
+  .cmp{max-width:680px; margin:0 auto; border:1px solid var(--border); border-radius:18px; overflow:hidden;
+    background:var(--surface); box-shadow:var(--shadow)}
+  .cmp .crow{display:grid; grid-template-columns:1fr 108px 124px; align-items:center; padding:15px 22px; border-top:1px solid var(--border); gap:10px}
+  .cmp .crow.head{border-top:0; background:var(--surface-2); padding-top:16px; padding-bottom:16px}
+  .cmp .feat{font-size:14.5px; font-weight:600}
+  .cmp .chead{font-size:12.5px; font-weight:700; text-align:center; letter-spacing:.01em}
+  .cmp .chead.us{color:var(--brand)} .cmp .chead.them{color:var(--text-mute)}
+  .cmp .cell{display:flex; justify-content:center}
+  .cmp .cell svg{width:20px; height:20px}
+  .cmp .yes{color:var(--brand)} .cmp .no{color:var(--text-mute); opacity:.5}
+  .cmp .us-col{background:color-mix(in srgb,var(--brand) 6%, transparent)}
+  @media (max-width:560px){ .cmp .crow{grid-template-columns:1fr 58px 68px; padding:13px 14px} .cmp .feat{font-size:13px} }
+
+  /* ---------- use cases ---------- */
+  .uc-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+  .uc{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px; box-shadow:var(--shadow);
+    display:flex; gap:16px; align-items:flex-start; transition:transform .18s ease, box-shadow .25s}
+  .uc:hover{transform:translateY(-3px); box-shadow:0 18px 44px rgba(40,52,120,.12)}
+  .uc .uic{width:44px; height:44px; border-radius:12px; flex:none; display:grid; place-items:center;
+    background:color-mix(in srgb,var(--brand) 13%,transparent); color:var(--brand)}
+  .uc .uic svg{width:22px; height:22px}
+  .uc h3{font-size:16.5px; margin:0 0 6px; letter-spacing:-.01em}
+  .uc p{margin:0; color:var(--text-dim); font-size:14px; line-height:1.6}
+  @media (max-width:620px){ .uc-grid{grid-template-columns:1fr} }
+
   @media (prefers-reduced-motion:reduce){
     .reveal{opacity:1; transform:none; transition:none} html{scroll-behavior:auto}
     .brand .mark svg path{stroke-dashoffset:0; animation:none}
@@ -473,8 +524,126 @@
     </div>
   </section>
 
+  <!-- CROSS-CHECK PIPELINE -->
+  <section class="block how" id="crosscheck">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="cc_kicker">핵심 기술</span>
+        <h2 data-i18n="cc_title">한 번 더 확인하고 보냅니다</h2>
+        <p data-i18n="cc_sub">보낸 번역이 정말 맞는지, 다시 원래 언어로 되돌려 의미를 대조합니다.</p>
+      </div>
+      <div class="pipe reveal">
+        <div class="pstep">
+          <div class="pl"><span class="num">1</span><span data-i18n="cc_s1l">원문</span></div>
+          <div class="ptext">주말에 시간 괜찮아요?</div>
+          <div class="plang" data-i18n="cc_s1lang">한국어</div>
+        </div>
+        <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="pstep">
+          <div class="pl"><span class="num">2</span><span data-i18n="cc_s2l">번역</span></div>
+          <div class="ptext">Cuối tuần bạn có rảnh không?</div>
+          <div class="plang" data-i18n="cc_s2lang">베트남어</div>
+        </div>
+        <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="pstep">
+          <div class="pl"><span class="num">3</span><span data-i18n="cc_s3l">역번역 확인</span></div>
+          <div class="ptext">주말에 시간 있어요?</div>
+          <div class="plang" data-i18n="cc_s3lang">한국어로 되돌림</div>
+        </div>
+        <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="pstep ok">
+          <div class="pl"><span class="num">✓</span><span data-i18n="cc_s4l">결과</span></div>
+          <div class="ptext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="cc_s4">의미 일치</span></div>
+          <div class="plang" data-i18n="cc_s4lang">안심하고 전송</div>
+        </div>
+      </div>
+      <div class="lia reveal">
+        <span class="chip"><span class="fl">🇰🇷</span>만나서 반가워요<small>한국어</small></span>
+        <span class="chip"><span class="fl">🇻🇳</span>Rất vui được gặp bạn<small>Tiếng Việt</small></span>
+        <span class="chip"><span class="fl">🇺🇸</span>Nice to meet you<small>English</small></span>
+        <span class="chip"><span class="fl">🇯🇵</span>はじめまして<small>日本語</small></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="block" id="compare">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="cmp_kicker">무엇이 다른가</span>
+        <h2 data-i18n="cmp_title">복붙 번역기와는 다릅니다</h2>
+        <p data-i18n="cmp_sub">창을 오갈 필요 없이, 대화 그 자체가 번역됩니다.</p>
+      </div>
+      <div class="cmp reveal">
+        <div class="crow head">
+          <span class="feat"></span>
+          <span class="chead them" data-i18n="cmp_them">복붙 번역기</span>
+          <span class="chead us">LingoLink</span>
+        </div>
+        <div class="crow">
+          <span class="feat" data-i18n="cmp_r0">정확한 텍스트 번역</span>
+          <span class="cell yes" data-cmp="yes"></span>
+          <span class="cell yes us-col" data-cmp="yes"></span>
+        </div>
+        <div class="crow">
+          <span class="feat" data-i18n="cmp_r1">대화 안에서 바로 번역</span>
+          <span class="cell no" data-cmp="no"></span>
+          <span class="cell yes us-col" data-cmp="yes"></span>
+        </div>
+        <div class="crow">
+          <span class="feat" data-i18n="cmp_r2">양방향 자동 번역</span>
+          <span class="cell no" data-cmp="no"></span>
+          <span class="cell yes us-col" data-cmp="yes"></span>
+        </div>
+        <div class="crow">
+          <span class="feat" data-i18n="cmp_r3">역번역으로 의미 검증</span>
+          <span class="cell no" data-cmp="no"></span>
+          <span class="cell yes us-col" data-cmp="yes"></span>
+        </div>
+        <div class="crow">
+          <span class="feat" data-i18n="cmp_r4">음성·영상 통화 번역</span>
+          <span class="cell no" data-cmp="no"></span>
+          <span class="cell yes us-col" data-cmp="yes"></span>
+        </div>
+        <div class="crow">
+          <span class="feat" data-i18n="cmp_r5">자주 쓰는 표현 학습</span>
+          <span class="cell no" data-cmp="no"></span>
+          <span class="cell yes us-col" data-cmp="yes"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="block how" id="usecases">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="uc_kicker">이럴 때 좋아요</span>
+        <h2 data-i18n="uc_title">언어가 다른 모든 순간에</h2>
+      </div>
+      <div class="uc-grid">
+        <div class="uc reveal">
+          <span class="uic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <div><h3 data-i18n="uc1_t">외국인 친구·동료와</h3><p data-i18n="uc1_d">매번 번역기를 켜지 않아도, 평소 쓰던 메신저처럼 자연스럽게 대화하세요.</p></div>
+        </div>
+        <div class="uc reveal">
+          <span class="uic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <div><h3 data-i18n="uc2_t">해외 생활·유학</h3><p data-i18n="uc2_d">낯선 나라에서 집을 구하고, 약속을 잡고, 도움을 요청하는 일이 한결 수월해집니다.</p></div>
+        </div>
+        <div class="uc reveal">
+          <span class="uic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8Z"/></svg></span>
+          <div><h3 data-i18n="uc3_t">국제 커플·가족</h3><p data-i18n="uc3_d">서로의 모국어로 마음을 전하세요. 사소한 뉘앙스까지 놓치지 않습니다.</p></div>
+        </div>
+        <div class="uc reveal">
+          <span class="uic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2ZM10 5h4v2h-4Z"/></svg></span>
+          <div><h3 data-i18n="uc4_t">비즈니스 파트너</h3><p data-i18n="uc4_d">한국과 베트남을 오가는 거래, 통화와 메시지 모두 같은 언어처럼 이어집니다.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- HOW -->
-  <section class="block how" id="how">
+  <section class="block" id="how">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="kicker" data-i18n="how_kicker">시작은 간단하게</span>
@@ -632,7 +801,16 @@
       q2:"어떤 언어를 지원하나요?", a2:"현재 한국어·베트남어·영어·일본어를 지원합니다. 나는 내 언어로, 상대는 상대의 언어로 대화하면 자동으로 양방향 번역됩니다.",
       q3:"통화 중에도 번역되나요?", a3:"네. 음성·영상 통화 중에도 실시간으로 번역됩니다. 블루투스 이어폰을 연결해도 또렷하게 통화할 수 있습니다.",
       q4:"요금이 있나요?", a4:"앱은 App Store와 Google Play에서 무료로 내려받을 수 있습니다. 지금 바로 시작해 보세요.",
-      q5:"대화 내용은 안전한가요?", a5:"대화는 안전하게 보호되며, 서비스 운영에 필요한 최소한의 정보만 다룹니다. 자세한 내용은 하단의 개인정보처리방침에서 확인할 수 있습니다."
+      q5:"대화 내용은 안전한가요?", a5:"대화는 안전하게 보호되며, 서비스 운영에 필요한 최소한의 정보만 다룹니다. 자세한 내용은 하단의 개인정보처리방침에서 확인할 수 있습니다.",
+      cc_kicker:"핵심 기술", cc_title:"한 번 더 확인하고 보냅니다", cc_sub:"보낸 번역이 정말 맞는지, 다시 원래 언어로 되돌려 의미를 대조합니다.",
+      cc_s1l:"원문", cc_s1lang:"한국어", cc_s2l:"번역", cc_s2lang:"베트남어", cc_s3l:"역번역 확인", cc_s3lang:"한국어로 되돌림", cc_s4l:"결과", cc_s4:"의미 일치", cc_s4lang:"안심하고 전송",
+      cmp_kicker:"무엇이 다른가", cmp_title:"복붙 번역기와는 다릅니다", cmp_sub:"창을 오갈 필요 없이, 대화 그 자체가 번역됩니다.",
+      cmp_them:"복붙 번역기", cmp_r0:"정확한 텍스트 번역", cmp_r1:"대화 안에서 바로 번역", cmp_r2:"양방향 자동 번역", cmp_r3:"역번역으로 의미 검증", cmp_r4:"음성·영상 통화 번역", cmp_r5:"자주 쓰는 표현 학습",
+      uc_kicker:"이럴 때 좋아요", uc_title:"언어가 다른 모든 순간에",
+      uc1_t:"외국인 친구·동료와", uc1_d:"매번 번역기를 켜지 않아도, 평소 쓰던 메신저처럼 자연스럽게 대화하세요.",
+      uc2_t:"해외 생활·유학", uc2_d:"낯선 나라에서 집을 구하고, 약속을 잡고, 도움을 요청하는 일이 한결 수월해집니다.",
+      uc3_t:"국제 커플·가족", uc3_d:"서로의 모국어로 마음을 전하세요. 사소한 뉘앙스까지 놓치지 않습니다.",
+      uc4_t:"비즈니스 파트너", uc4_d:"한국과 베트남을 오가는 거래, 통화와 메시지 모두 같은 언어처럼 이어집니다."
     },
     vi:{
       doc_title:"LingoLink — Tin nhắn dịch theo thời gian thực",
@@ -667,7 +845,16 @@
       q2:"Hỗ trợ những ngôn ngữ nào?", a2:"Hiện hỗ trợ tiếng Hàn, tiếng Việt, tiếng Anh và tiếng Nhật. Bạn dùng tiếng của mình, người kia dùng tiếng của họ — dịch tự động hai chiều.",
       q3:"Cuộc gọi có được dịch không?", a3:"Có. Cuộc gọi thoại và video cũng được dịch theo thời gian thực. Nghe rõ ràng ngay cả khi dùng tai nghe Bluetooth.",
       q4:"Có mất phí không?", a4:"Ứng dụng được tải miễn phí trên App Store và Google Play. Hãy bắt đầu ngay hôm nay.",
-      q5:"Nội dung trò chuyện có an toàn không?", a5:"Cuộc trò chuyện được bảo vệ an toàn và chỉ xử lý thông tin tối thiểu cần thiết. Xem thêm tại Chính sách bảo mật ở cuối trang."
+      q5:"Nội dung trò chuyện có an toàn không?", a5:"Cuộc trò chuyện được bảo vệ an toàn và chỉ xử lý thông tin tối thiểu cần thiết. Xem thêm tại Chính sách bảo mật ở cuối trang.",
+      cc_kicker:"Công nghệ cốt lõi", cc_title:"Kiểm tra một lần nữa rồi mới gửi", cc_sub:"Để chắc bản dịch đúng, câu được dịch ngược lại ngôn ngữ gốc và đối chiếu ý nghĩa.",
+      cc_s1l:"Câu gốc", cc_s1lang:"Tiếng Hàn", cc_s2l:"Bản dịch", cc_s2lang:"Tiếng Việt", cc_s3l:"Dịch ngược", cc_s3lang:"Trở lại tiếng Hàn", cc_s4l:"Kết quả", cc_s4:"Đúng nghĩa", cc_s4lang:"Yên tâm gửi đi",
+      cmp_kicker:"Khác biệt ở đâu", cmp_title:"Không như công cụ dịch sao chép", cmp_sub:"Không cần chuyển qua lại giữa các cửa sổ — chính cuộc trò chuyện được dịch.",
+      cmp_them:"Dịch sao chép", cmp_r0:"Dịch văn bản chính xác", cmp_r1:"Dịch ngay trong cuộc trò chuyện", cmp_r2:"Dịch tự động hai chiều", cmp_r3:"Kiểm tra nghĩa bằng dịch ngược", cmp_r4:"Dịch cuộc gọi thoại & video", cmp_r5:"Học cách nói thường dùng",
+      uc_kicker:"Hữu ích khi", uc_title:"Trong mọi khoảnh khắc bất đồng ngôn ngữ",
+      uc1_t:"Với bạn bè & đồng nghiệp nước ngoài", uc1_d:"Không cần bật công cụ dịch mỗi lần — trò chuyện tự nhiên như ứng dụng nhắn tin quen thuộc.",
+      uc2_t:"Sống & du học ở nước ngoài", uc2_d:"Tìm nhà, hẹn lịch và nhờ giúp đỡ ở một đất nước xa lạ trở nên dễ dàng hơn nhiều.",
+      uc3_t:"Cặp đôi & gia đình đa quốc gia", uc3_d:"Trao gửi tấm lòng bằng tiếng mẹ đẻ của nhau, không bỏ lỡ cả những sắc thái nhỏ.",
+      uc4_t:"Đối tác kinh doanh", uc4_d:"Giao dịch giữa Hàn Quốc và Việt Nam — cuộc gọi và tin nhắn đều trôi chảy như cùng một ngôn ngữ."
     },
     en:{
       doc_title:"LingoLink — Real-time Translation Messenger",
@@ -702,7 +889,16 @@
       q2:"Which languages are supported?", a2:"Korean, Vietnamese, English and Japanese for now. You write in your language and the other person reads in theirs — translated automatically, both ways.",
       q3:"Are calls translated too?", a3:"Yes. Voice and video calls are translated in real time, and stay crystal-clear even over Bluetooth earbuds.",
       q4:"Is there a fee?", a4:"The app is free to download on the App Store and Google Play. Start your first conversation today.",
-      q5:"Are my conversations private?", a5:"Conversations are kept secure and only the minimum information needed to run the service is handled. See the Privacy Policy at the bottom of the page for details."
+      q5:"Are my conversations private?", a5:"Conversations are kept secure and only the minimum information needed to run the service is handled. See the Privacy Policy at the bottom of the page for details.",
+      cc_kicker:"Core technology", cc_title:"Checked once more before it sends", cc_sub:"To be sure the translation is right, it's translated back to the original language and the meaning is compared.",
+      cc_s1l:"Original", cc_s1lang:"Korean", cc_s2l:"Translated", cc_s2lang:"Vietnamese", cc_s3l:"Back-translated", cc_s3lang:"Back to Korean", cc_s4l:"Result", cc_s4:"Meaning matches", cc_s4lang:"Sent with confidence",
+      cmp_kicker:"What's different", cmp_title:"Not your copy-paste translator", cmp_sub:"No flipping between windows — the conversation itself is translated.",
+      cmp_them:"Copy-paste app", cmp_r0:"Accurate text translation", cmp_r1:"Translates inside the chat", cmp_r2:"Automatic, both directions", cmp_r3:"Verifies meaning by back-translation", cmp_r4:"Translates voice & video calls", cmp_r5:"Learns your common phrasing",
+      uc_kicker:"Great for", uc_title:"Every moment language gets in the way",
+      uc1_t:"Friends & coworkers abroad", uc1_d:"No need to open a translator every time — chat as naturally as in the messenger you already use.",
+      uc2_t:"Living & studying abroad", uc2_d:"Finding a place, making plans and asking for help in an unfamiliar country gets a whole lot easier.",
+      uc3_t:"Cross-border couples & family", uc3_d:"Share what you mean in each other's native language, down to the smallest nuance.",
+      uc4_t:"Business partners", uc4_d:"Deals between Korea and Vietnam — calls and messages flow as if you spoke the same language."
     },
     ja:{
       doc_title:"LingoLink — リアルタイム翻訳メッセンジャー",
@@ -737,7 +933,16 @@
       q2:"対応している言語は？", a2:"現在、韓国語・ベトナム語・英語・日本語に対応しています。自分は自分の言語で、相手は相手の言語で——双方向に自動翻訳されます。",
       q3:"通話中も翻訳されますか？", a3:"はい。音声・ビデオ通話中もリアルタイムで翻訳されます。Bluetoothイヤホンでもクリアに通話できます。",
       q4:"料金はかかりますか？", a4:"アプリは App Store と Google Play から無料でダウンロードできます。今すぐ始めてみてください。",
-      q5:"会話の内容は安全ですか？", a5:"会話は安全に保護され、サービス運営に必要な最小限の情報のみを扱います。詳しくはページ下部のプライバシーポリシーをご覧ください。"
+      q5:"会話の内容は安全ですか？", a5:"会話は安全に保護され、サービス運営に必要な最小限の情報のみを扱います。詳しくはページ下部のプライバシーポリシーをご覧ください。",
+      cc_kicker:"中核となる技術", cc_title:"もう一度確認してから送ります", cc_sub:"訳文が本当に正しいか、もう一度元の言語に戻して意味を照らし合わせます。",
+      cc_s1l:"原文", cc_s1lang:"韓国語", cc_s2l:"翻訳", cc_s2lang:"ベトナム語", cc_s3l:"逆翻訳で確認", cc_s3lang:"韓国語に戻す", cc_s4l:"結果", cc_s4:"意味が一致", cc_s4lang:"安心して送信",
+      cmp_kicker:"何が違うのか", cmp_title:"コピペ翻訳とは違います", cmp_sub:"ウィンドウを行き来する必要はなく、会話そのものが翻訳されます。",
+      cmp_them:"コピペ翻訳", cmp_r0:"正確なテキスト翻訳", cmp_r1:"会話の中でそのまま翻訳", cmp_r2:"双方向の自動翻訳", cmp_r3:"逆翻訳で意味を検証", cmp_r4:"音声・ビデオ通話の翻訳", cmp_r5:"よく使う表現を学習",
+      uc_kicker:"こんなときに", uc_title:"言葉が違うすべての瞬間に",
+      uc1_t:"外国の友人・同僚と", uc1_d:"毎回翻訳アプリを開かなくても、いつものメッセンジャーのように自然に会話できます。",
+      uc2_t:"海外生活・留学", uc2_d:"慣れない国で家を探し、約束を取り、助けを求めることがぐっと楽になります。",
+      uc3_t:"国際カップル・家族", uc3_d:"お互いの母語で気持ちを伝えましょう。ささいなニュアンスも逃しません。",
+      uc4_t:"ビジネスパートナー", uc4_d:"韓国とベトナムを結ぶ取引も、通話もメッセージも同じ言語のようにつながります。"
     }
   };
 
@@ -840,6 +1045,13 @@
       return '<span class="g"><span class="fl">'+g.fl+'</span>'+g.t+'</span><span class="g sep">∞</span>';
     }).join("");
     track.innerHTML = seq + seq; // duplicate for seamless -50% loop
+  })();
+
+  // comparison check / dash icons
+  (function(){
+    var yes='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    var no='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>';
+    document.querySelectorAll("[data-cmp]").forEach(function(c){ c.innerHTML = c.getAttribute("data-cmp")==="yes" ? yes : no; });
   })();
 
   // animated chat playthrough
