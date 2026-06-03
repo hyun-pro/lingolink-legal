@@ -345,9 +345,9 @@
   @media (max-width:620px){ .uc-grid{grid-template-columns:1fr} }
 
   /* ---------- real screenshots ---------- */
-  .shots{display:flex; gap:48px; justify-content:center; align-items:flex-start; flex-wrap:wrap}
-  .device{margin:0; width:286px; max-width:76vw}
-  .device:nth-child(2){margin-top:30px}
+  .shots{display:flex; gap:40px; justify-content:center; align-items:flex-start; flex-wrap:nowrap}
+  .device{margin:0; min-width:0; flex:0 1 236px}
+  .device:nth-child(2){margin-top:18px}
   .device .ph{background:#0a0b10; border-radius:42px; padding:9px; box-shadow:var(--shadow-lg);
     border:1px solid rgba(255,255,255,.08); position:relative}
   .device .ph .notch{position:absolute; top:9px; left:50%; transform:translateX(-50%); width:116px; height:23px;
@@ -356,7 +356,16 @@
   .device figcaption{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:18px;
     font-size:14.5px; font-weight:600; color:var(--text-dim)}
   .device figcaption .fl{font-size:17px}
-  @media (max-width:620px){ .device:nth-child(2){margin-top:0} .shots{gap:36px} }
+  @media (max-width:620px){
+    .shots{flex-wrap:nowrap; gap:12px; align-items:flex-start}
+    .device{width:auto; flex:1 1 0; min-width:0; max-width:50%; margin:0}
+    .device:nth-child(2){margin-top:0}
+    .device .ph{border-radius:28px; padding:6px}
+    .device .ph .notch{width:84px; height:16px; top:6px; border-radius:0 0 11px 11px}
+    .device .shot{border-radius:22px}
+    .device figcaption{font-size:11.5px; margin-top:11px; gap:5px}
+    .device figcaption .fl{font-size:14px}
+  }
 
   @media (prefers-reduced-motion:reduce){
     .reveal{opacity:1; transform:none; transition:none} html{scroll-behavior:auto}
