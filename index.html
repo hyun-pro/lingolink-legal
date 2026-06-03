@@ -344,6 +344,20 @@
   .uc p{margin:0; color:var(--text-dim); font-size:14px; line-height:1.6}
   @media (max-width:620px){ .uc-grid{grid-template-columns:1fr} }
 
+  /* ---------- real screenshots ---------- */
+  .shots{display:flex; gap:48px; justify-content:center; align-items:flex-start; flex-wrap:wrap}
+  .device{margin:0; width:286px; max-width:76vw}
+  .device:nth-child(2){margin-top:30px}
+  .device .ph{background:#0a0b10; border-radius:42px; padding:9px; box-shadow:var(--shadow-lg);
+    border:1px solid rgba(255,255,255,.08); position:relative}
+  .device .ph .notch{position:absolute; top:9px; left:50%; transform:translateX(-50%); width:116px; height:23px;
+    background:#0a0b10; border-radius:0 0 15px 15px; z-index:3}
+  .device .shot{display:block; width:100%; border-radius:34px}
+  .device figcaption{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:18px;
+    font-size:14.5px; font-weight:600; color:var(--text-dim)}
+  .device figcaption .fl{font-size:17px}
+  @media (max-width:620px){ .device:nth-child(2){margin-top:0} .shots{gap:36px} }
+
   @media (prefers-reduced-motion:reduce){
     .reveal{opacity:1; transform:none; transition:none} html{scroll-behavior:auto}
     .brand .mark svg path{stroke-dashoffset:0; animation:none}
@@ -367,14 +381,29 @@
   @media (max-width:620px){
     .feat-grid{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr; gap:28px}
+    .nav-right{gap:9px}
+    .langsw{gap:1px; padding:2px}
     .langsw button{padding:5px 7px; font-size:12px}
-    section.block{padding:64px 0}
-    .ft-top{flex-direction:column}
+    section.block{padding:62px 0}
+    .hero{padding:40px 0 50px}
+    .cta-band{padding:64px 0}
+    .cta-card{padding:46px 22px}
+    .lia{margin-top:28px} .lia .chip{font-size:13.5px; padding:9px 14px; gap:8px}
+    .marquee .g{font-size:17px} .marquee .track{gap:36px}
+    .sec-head{margin-bottom:40px} .sec-head p{font-size:15.5px}
+    .ft-top{flex-direction:column} .ft-cols{gap:36px}
+  }
+  @media (max-width:390px){
+    .wrap{padding:0 18px}
+    .brand{font-size:16px; gap:8px} .brand .mark{width:27px; height:27px} .brand .mark svg{width:18px; height:18px}
+    .langsw button{padding:4px 6px; font-size:11px; letter-spacing:0}
+    .iconbtn{width:31px; height:31px}
+    h1{letter-spacing:-.03em}
   }
 </style>
 <script>
-  // anti-FOUC: apply saved theme before first paint
-  try{ var t=localStorage.getItem("ll_theme"); if(t==="dark"||t==="light") document.documentElement.setAttribute("data-theme",t); }catch(e){}
+  // anti-FOUC: default to light; honor explicit dark choice only
+  try{ var t=localStorage.getItem("ll_theme"); document.documentElement.setAttribute("data-theme", t==="dark"?"dark":"light"); }catch(e){ document.documentElement.setAttribute("data-theme","light"); }
 </script>
 </head>
 <body>
@@ -480,6 +509,27 @@
       <div class="track" id="mq-track"></div>
     </div>
   </div>
+
+  <!-- REAL SCREENS -->
+  <section class="block how" id="screens">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="rs_kicker">실제 화면</span>
+        <h2 data-i18n="rs_title">한 대화, 두 사람, 두 언어</h2>
+        <p data-i18n="rs_sub">같은 채팅방을 한국 사용자는 한국어로, 베트남 사용자는 베트남어로 봅니다. 보낸 메시지는 역번역으로 한 번 더 검증됩니다.</p>
+      </div>
+      <div class="shots reveal">
+        <figure class="device">
+          <div class="ph"><span class="notch"></span><img class="shot" src="/shot-ko.png" width="760" height="1474" alt="LingoLink — Korean view" loading="lazy"></div>
+          <figcaption><span class="fl">🇰🇷</span><span data-i18n="rs_cap_ko">민수 · 한국어로 봅니다</span></figcaption>
+        </figure>
+        <figure class="device">
+          <div class="ph"><span class="notch"></span><img class="shot" src="/shot-vi.png" width="760" height="1512" alt="LingoLink — Vietnamese view" loading="lazy"></div>
+          <figcaption><span class="fl">🇻🇳</span><span data-i18n="rs_cap_vi">Huong · 베트남어로 봅니다</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
   <!-- FEATURES -->
   <section class="block" id="features">
@@ -810,7 +860,9 @@
       uc1_t:"외국인 친구·동료와", uc1_d:"매번 번역기를 켜지 않아도, 평소 쓰던 메신저처럼 자연스럽게 대화하세요.",
       uc2_t:"해외 생활·유학", uc2_d:"낯선 나라에서 집을 구하고, 약속을 잡고, 도움을 요청하는 일이 한결 수월해집니다.",
       uc3_t:"국제 커플·가족", uc3_d:"서로의 모국어로 마음을 전하세요. 사소한 뉘앙스까지 놓치지 않습니다.",
-      uc4_t:"비즈니스 파트너", uc4_d:"한국과 베트남을 오가는 거래, 통화와 메시지 모두 같은 언어처럼 이어집니다."
+      uc4_t:"비즈니스 파트너", uc4_d:"한국과 베트남을 오가는 거래, 통화와 메시지 모두 같은 언어처럼 이어집니다.",
+      rs_kicker:"실제 화면", rs_title:"한 대화, 두 사람, 두 언어", rs_sub:"같은 채팅방을 한국 사용자는 한국어로, 베트남 사용자는 베트남어로 봅니다. 보낸 메시지는 역번역으로 한 번 더 검증됩니다.",
+      rs_cap_ko:"민수 · 한국어로 봅니다", rs_cap_vi:"Huong · 베트남어로 봅니다"
     },
     vi:{
       doc_title:"LingoLink — Tin nhắn dịch theo thời gian thực",
@@ -854,7 +906,9 @@
       uc1_t:"Với bạn bè & đồng nghiệp nước ngoài", uc1_d:"Không cần bật công cụ dịch mỗi lần — trò chuyện tự nhiên như ứng dụng nhắn tin quen thuộc.",
       uc2_t:"Sống & du học ở nước ngoài", uc2_d:"Tìm nhà, hẹn lịch và nhờ giúp đỡ ở một đất nước xa lạ trở nên dễ dàng hơn nhiều.",
       uc3_t:"Cặp đôi & gia đình đa quốc gia", uc3_d:"Trao gửi tấm lòng bằng tiếng mẹ đẻ của nhau, không bỏ lỡ cả những sắc thái nhỏ.",
-      uc4_t:"Đối tác kinh doanh", uc4_d:"Giao dịch giữa Hàn Quốc và Việt Nam — cuộc gọi và tin nhắn đều trôi chảy như cùng một ngôn ngữ."
+      uc4_t:"Đối tác kinh doanh", uc4_d:"Giao dịch giữa Hàn Quốc và Việt Nam — cuộc gọi và tin nhắn đều trôi chảy như cùng một ngôn ngữ.",
+      rs_kicker:"Màn hình thực tế", rs_title:"Một cuộc trò chuyện, hai người, hai ngôn ngữ", rs_sub:"Cùng một phòng chat: người Hàn xem bằng tiếng Hàn, người Việt xem bằng tiếng Việt. Tin nhắn gửi đi được kiểm tra lại bằng dịch ngược.",
+      rs_cap_ko:"Minsu · xem bằng tiếng Hàn", rs_cap_vi:"Huong · xem bằng tiếng Việt"
     },
     en:{
       doc_title:"LingoLink — Real-time Translation Messenger",
@@ -898,7 +952,9 @@
       uc1_t:"Friends & coworkers abroad", uc1_d:"No need to open a translator every time — chat as naturally as in the messenger you already use.",
       uc2_t:"Living & studying abroad", uc2_d:"Finding a place, making plans and asking for help in an unfamiliar country gets a whole lot easier.",
       uc3_t:"Cross-border couples & family", uc3_d:"Share what you mean in each other's native language, down to the smallest nuance.",
-      uc4_t:"Business partners", uc4_d:"Deals between Korea and Vietnam — calls and messages flow as if you spoke the same language."
+      uc4_t:"Business partners", uc4_d:"Deals between Korea and Vietnam — calls and messages flow as if you spoke the same language.",
+      rs_kicker:"Real screens", rs_title:"One chat, two people, two languages", rs_sub:"The same chat room — the Korean user reads it in Korean, the Vietnamese user in Vietnamese. Sent messages are verified by back-translation.",
+      rs_cap_ko:"Minsu · reading in Korean", rs_cap_vi:"Huong · reading in Vietnamese"
     },
     ja:{
       doc_title:"LingoLink — リアルタイム翻訳メッセンジャー",
@@ -942,7 +998,9 @@
       uc1_t:"外国の友人・同僚と", uc1_d:"毎回翻訳アプリを開かなくても、いつものメッセンジャーのように自然に会話できます。",
       uc2_t:"海外生活・留学", uc2_d:"慣れない国で家を探し、約束を取り、助けを求めることがぐっと楽になります。",
       uc3_t:"国際カップル・家族", uc3_d:"お互いの母語で気持ちを伝えましょう。ささいなニュアンスも逃しません。",
-      uc4_t:"ビジネスパートナー", uc4_d:"韓国とベトナムを結ぶ取引も、通話もメッセージも同じ言語のようにつながります。"
+      uc4_t:"ビジネスパートナー", uc4_d:"韓国とベトナムを結ぶ取引も、通話もメッセージも同じ言語のようにつながります。",
+      rs_kicker:"実際の画面", rs_title:"ひとつの会話、二人、二つの言語", rs_sub:"同じトークルームを、韓国のユーザーは韓国語で、ベトナムのユーザーはベトナム語で見ます。送ったメッセージは逆翻訳でもう一度検証されます。",
+      rs_cap_ko:"ミンス · 韓国語で表示", rs_cap_vi:"Huong · ベトナム語で表示"
     }
   };
 
