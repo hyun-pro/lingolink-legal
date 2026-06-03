@@ -3,43 +3,674 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4D6AF7">
 <meta name="robots" content="index, follow">
+
+<title>LingoLink — 실시간 번역 메신저 / Real-time Translation Messenger</title>
+<meta name="description" content="한국어·베트남어·영어·일본어를 실시간으로 번역하는 메신저. 보낸 번역을 역번역으로 한 번 더 검증해 의미가 어긋나지 않게 합니다.">
+
 <link rel="canonical" href="https://lingolink.app/">
+<link rel="alternate" hreflang="ko" href="https://lingolink.app/?lang=ko">
+<link rel="alternate" hreflang="vi" href="https://lingolink.app/?lang=vi">
+<link rel="alternate" hreflang="en" href="https://lingolink.app/?lang=en">
+<link rel="alternate" hreflang="ja" href="https://lingolink.app/?lang=ja">
 <link rel="alternate" hreflang="x-default" href="https://lingolink.app/">
-<link rel="alternate" hreflang="ko" href="https://lingolink.app/privacy-ko.html">
-<link rel="alternate" hreflang="vi" href="https://lingolink.app/privacy-vi.html">
-<link rel="alternate" hreflang="en" href="https://lingolink.app/privacy-en.html">
-<link rel="alternate" hreflang="ja" href="https://lingolink.app/privacy-ja.html">
-<title>LingoLink ??媛쒖씤?뺣낫 泥섎━諛⑹묠 / Privacy Policy</title>
+
+<link rel="icon" type="image/png" href="/icon-512.png">
+<link rel="apple-touch-icon" href="/icon-512.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LingoLink">
+<meta property="og:title" content="LingoLink — 실시간 번역 메신저">
+<meta property="og:description" content="한국어·베트남어·영어·일본어를 실시간으로 번역하는 메신저. 역번역 검증으로 의미까지 지킵니다.">
+<meta property="og:url" content="https://lingolink.app/">
+<meta property="og:image" content="https://lingolink.app/og.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LingoLink — 실시간 번역 메신저">
+<meta name="twitter:description" content="네 개 언어를 오가는 대화, 역번역 검증으로 의미까지.">
+<meta name="twitter:image" content="https://lingolink.app/og.png">
+
 <style>
-:root { color-scheme: light dark; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-       max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.7; color: #111; }
-@media (prefers-color-scheme: dark) { body { background: #0a0a0b; color: #eee; } a { color: #4ea1ff; } }
-h1 { font-size: 28px; margin-bottom: 8px; }
-.sub { color: #888; margin-bottom: 24px; }
-.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
-.lang-grid a { display: block; padding: 18px; border: 1px solid #ddd; border-radius: 12px; text-decoration: none;
-               color: inherit; font-weight: 600; }
-@media (prefers-color-scheme: dark) { .lang-grid a { border-color: #333; } }
-.lang-grid a:hover { background: rgba(0,0,0,0.04); }
-.flag { font-size: 24px; margin-right: 8px; }
-footer { margin-top: 40px; color: #888; font-size: 14px; }
+  :root{
+    --grad-a:#0A84FF; --grad-b:#8A5CFF; --brand:#4D6AF7; --brand-ink:#3A52D8;
+    --bg:#ffffff; --bg-soft:#f6f7fb; --surface:#ffffff; --surface-2:#f2f4fa;
+    --border:#e7e9f2; --text:#0e1116; --text-dim:#5b6472; --text-mute:#8a93a3;
+    --shadow:0 1px 2px rgba(16,22,40,.04),0 12px 32px rgba(16,22,40,.08);
+    --shadow-lg:0 30px 80px rgba(40,52,120,.22);
+    --radius:16px; --maxw:1120px;
+    color-scheme:light dark;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0a0b10; --bg-soft:#0e1018; --surface:#13161f; --surface-2:#171b26;
+      --border:#222637; --text:#eef1f7; --text-dim:#a4adbe; --text-mute:#727b8e;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.5);
+      --shadow-lg:0 36px 90px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR","Noto Sans JP","Helvetica Neue",Arial,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+  .grad{background:linear-gradient(100deg,var(--grad-a),var(--grad-b)); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+  /* ---------- header ---------- */
+  header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(14px);
+    background:color-mix(in srgb,var(--bg) 82%, transparent); border-bottom:1px solid transparent;
+    transition:border-color .25s ease, background .25s ease}
+  header.scrolled{border-bottom-color:var(--border)}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:66px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; letter-spacing:-.02em}
+  .brand .mark{width:30px; height:30px; border-radius:9px; background:linear-gradient(150deg,var(--grad-a),var(--grad-b));
+    display:grid; place-items:center; box-shadow:0 6px 16px rgba(77,106,247,.35)}
+  .brand .mark svg{width:20px; height:20px}
+  .nav-right{display:flex; align-items:center; gap:18px}
+  .nav-links{display:flex; gap:26px}
+  .nav-links a{font-size:14.5px; color:var(--text-dim); font-weight:500; transition:color .15s}
+  .nav-links a:hover{color:var(--text)}
+  .langsw{display:flex; gap:2px; padding:3px; background:var(--surface-2); border:1px solid var(--border);
+    border-radius:999px}
+  .langsw button{border:0; background:transparent; color:var(--text-dim); font:inherit; font-size:12.5px;
+    font-weight:600; padding:5px 9px; border-radius:999px; cursor:pointer; letter-spacing:.02em; transition:.15s}
+  .langsw button.active{background:var(--surface); color:var(--text); box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  @media (prefers-color-scheme:dark){ .langsw button.active{background:#272c3b} }
+  .btn{display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:14.5px; cursor:pointer;
+    border-radius:11px; padding:10px 18px; border:1px solid transparent; transition:transform .12s ease, box-shadow .2s, background .2s}
+  .btn-primary{background:linear-gradient(120deg,var(--grad-a),var(--grad-b)); color:#fff;
+    box-shadow:0 8px 22px rgba(77,106,247,.35)}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 12px 28px rgba(77,106,247,.45)}
+  .menu-toggle{display:none}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; padding:84px 0 72px; overflow:hidden}
+  .hero::before{content:""; position:absolute; inset:0; z-index:-1;
+    background:
+      radial-gradient(60% 50% at 78% 8%, rgba(138,92,255,.16), transparent 60%),
+      radial-gradient(55% 45% at 10% 0%, rgba(10,132,255,.14), transparent 60%);
+  }
+  .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--brand-ink);
+    background:color-mix(in srgb,var(--brand) 12%, transparent); border:1px solid color-mix(in srgb,var(--brand) 24%, transparent);
+    padding:6px 13px; border-radius:999px; letter-spacing:.01em}
+  @media (prefers-color-scheme:dark){ .eyebrow{color:#aab8ff} }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:linear-gradient(var(--grad-a),var(--grad-b))}
+  h1{font-size:clamp(34px,5vw,56px); line-height:1.08; letter-spacing:-.035em; margin:22px 0 18px; font-weight:780}
+  .lede{font-size:clamp(16px,1.6vw,19px); color:var(--text-dim); max-width:30em; margin:0 0 30px}
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+  .store{display:inline-flex; align-items:center; gap:11px; background:#0c0d12; color:#fff; border-radius:13px;
+    padding:11px 18px; transition:transform .12s ease, box-shadow .2s; border:1px solid rgba(255,255,255,.08)}
+  .store:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(0,0,0,.25)}
+  @media (prefers-color-scheme:dark){ .store{background:#1b1f2b; border-color:#2a3042} }
+  .store svg{width:25px; height:25px; flex:none}
+  .store .s-top{font-size:10.5px; opacity:.78; line-height:1.2; letter-spacing:.02em}
+  .store .s-main{font-size:16px; font-weight:600; line-height:1.15; letter-spacing:-.01em}
+  .trust{margin-top:20px; font-size:13.5px; color:var(--text-mute); display:flex; align-items:center; gap:8px}
+  .trust svg{width:15px; height:15px; color:var(--brand)}
+
+  /* ---------- phone ---------- */
+  .phone-stage{display:flex; justify-content:center; position:relative}
+  .phone-stage::after{content:""; position:absolute; width:78%; height:78%; left:11%; top:14%; z-index:-1;
+    background:linear-gradient(150deg,var(--grad-a),var(--grad-b)); filter:blur(70px); opacity:.35; border-radius:50%}
+  .phone{width:300px; max-width:82vw; background:#0a0b10; border-radius:42px; padding:11px;
+    box-shadow:var(--shadow-lg); border:1px solid rgba(255,255,255,.07); position:relative}
+  .phone .notch{position:absolute; top:11px; left:50%; transform:translateX(-50%); width:120px; height:26px;
+    background:#0a0b10; border-radius:0 0 16px 16px; z-index:3}
+  .screen{background:linear-gradient(180deg,#f7f8fc,#eef1f9); border-radius:33px; overflow:hidden; height:600px;
+    display:flex; flex-direction:column}
+  .scr-head{background:#fff; padding:46px 16px 12px; display:flex; align-items:center; gap:11px; border-bottom:1px solid #eef0f6}
+  .scr-back{color:#9aa3b2}
+  .scr-av{width:38px; height:38px; border-radius:50%; background:linear-gradient(140deg,#34c1a0,#1f9d86); display:grid; place-items:center; color:#fff; font-weight:700; font-size:15px}
+  .scr-name{font-size:15px; font-weight:700; color:#10131a; line-height:1.2}
+  .scr-sub{font-size:11.5px; color:#9aa3b2; display:flex; align-items:center; gap:5px}
+  .scr-sub .live{width:6px; height:6px; border-radius:50%; background:#2ec28b}
+  .scr-body{flex:1; padding:16px 14px; display:flex; flex-direction:column; gap:14px; overflow:hidden;
+    background:#f4f6fb}
+  .msg{max-width:80%; display:flex; flex-direction:column; gap:4px}
+  .msg.me{align-self:flex-end; align-items:flex-end}
+  .bub{padding:9px 13px; border-radius:16px; font-size:13.5px; line-height:1.45; box-shadow:0 1px 1px rgba(16,22,40,.05)}
+  .msg.peer .bub{background:#fff; color:#13161d; border-bottom-left-radius:5px}
+  .msg.me .bub{background:linear-gradient(125deg,var(--grad-a),var(--grad-b)); color:#fff; border-bottom-right-radius:5px}
+  .tr{font-size:12.5px; line-height:1.4; padding:2px 4px; display:flex; gap:6px}
+  .msg.peer .tr{color:#3a414d}
+  .msg.me .tr{color:#cdd6ff; justify-content:flex-end}
+  .tr .ar{opacity:.6; flex:none}
+  .verify{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; color:#1f9d6b;
+    background:#e7f7ef; border-radius:999px; padding:3px 9px; align-self:flex-start}
+  .msg.me .verify{align-self:flex-end}
+  .verify svg{width:11px; height:11px}
+  .scr-input{background:#fff; border-top:1px solid #eef0f6; padding:11px 14px; display:flex; align-items:center; gap:10px}
+  .scr-field{flex:1; background:#f1f3f8; border-radius:999px; padding:9px 14px; font-size:12.5px; color:#9aa3b2}
+  .scr-mic{width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--grad-a),var(--grad-b)); display:grid; place-items:center; flex:none}
+  .scr-mic svg{width:16px; height:16px; color:#fff}
+
+  /* ---------- logos / proof strip ---------- */
+  .langstrip{padding:28px 0 8px}
+  .langstrip .row{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px 30px; opacity:.9}
+  .langstrip .label{width:100%; text-align:center; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--text-mute); margin-bottom:14px; font-weight:600}
+  .lpill{display:inline-flex; align-items:center; gap:9px; font-weight:600; font-size:15px; color:var(--text-dim)}
+  .lpill .fl{font-size:19px; line-height:1}
+
+  /* ---------- section shells ---------- */
+  section.block{padding:88px 0}
+  .sec-head{max-width:640px; margin:0 auto 52px; text-align:center}
+  .sec-head .kicker{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--brand)}
+  .sec-head h2{font-size:clamp(26px,3.4vw,38px); letter-spacing:-.03em; margin:12px 0 14px; font-weight:760; line-height:1.15}
+  .sec-head p{color:var(--text-dim); font-size:17px; margin:0}
+
+  /* ---------- features ---------- */
+  .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px;
+    box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .25s; position:relative; overflow:hidden}
+  .card:hover{transform:translateY(-3px); box-shadow:0 18px 44px rgba(40,52,120,.12)}
+  .card .ic{width:46px; height:46px; border-radius:12px; display:grid; place-items:center; margin-bottom:18px;
+    background:color-mix(in srgb,var(--brand) 13%, transparent); color:var(--brand)}
+  .card.hl{background:linear-gradient(155deg,var(--grad-a),var(--grad-b)); border-color:transparent; color:#fff}
+  .card.hl .ic{background:rgba(255,255,255,.16); color:#fff}
+  .card.hl p{color:rgba(255,255,255,.86)}
+  .card .ic svg{width:23px; height:23px}
+  .card h3{font-size:18px; margin:0 0 8px; letter-spacing:-.02em; font-weight:700}
+  .card p{margin:0; color:var(--text-dim); font-size:14.6px; line-height:1.6}
+
+  /* ---------- how ---------- */
+  .how{background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border)}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; counter-reset:s}
+  .step{position:relative; padding-top:8px}
+  .step .n{width:40px; height:40px; border-radius:12px; background:var(--surface); border:1px solid var(--border);
+    display:grid; place-items:center; font-weight:780; font-size:17px; color:var(--brand); margin-bottom:16px;
+    box-shadow:var(--shadow)}
+  .step h3{font-size:18px; margin:0 0 8px; letter-spacing:-.02em}
+  .step p{margin:0; color:var(--text-dim); font-size:14.6px}
+
+  /* ---------- cta band ---------- */
+  .cta-band{padding:96px 0}
+  .cta-card{position:relative; border-radius:28px; padding:64px 40px; text-align:center; overflow:hidden;
+    background:linear-gradient(135deg,var(--grad-a),var(--grad-b)); color:#fff; box-shadow:var(--shadow-lg)}
+  .cta-card::before{content:""; position:absolute; inset:0;
+    background:radial-gradient(60% 80% at 80% 0%, rgba(255,255,255,.18), transparent 60%)}
+  .cta-card > *{position:relative}
+  .cta-card h2{font-size:clamp(26px,3.4vw,40px); letter-spacing:-.03em; margin:0 0 12px; font-weight:780}
+  .cta-card p{color:rgba(255,255,255,.9); font-size:17px; margin:0 0 30px}
+  .cta-card .cta-row{justify-content:center}
+  .cta-card .store{background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.25); backdrop-filter:blur(6px)}
+  .cta-card .store:hover{background:rgba(255,255,255,.22)}
+
+  /* ---------- footer ---------- */
+  footer.ft{padding:56px 0 40px; border-top:1px solid var(--border)}
+  .ft-top{display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; margin-bottom:40px}
+  .ft-brand{max-width:300px}
+  .ft-brand .brand{margin-bottom:12px}
+  .ft-brand p{color:var(--text-mute); font-size:14px; margin:0}
+  .ft-cols{display:flex; gap:64px; flex-wrap:wrap}
+  .ft-col h4{font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-mute); margin:0 0 14px; font-weight:700}
+  .ft-col a{display:block; color:var(--text-dim); font-size:14.5px; margin-bottom:10px; transition:color .15s}
+  .ft-col a:hover{color:var(--text)}
+  .ft-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:24px;
+    border-top:1px solid var(--border); color:var(--text-mute); font-size:13px}
+  .ft-bottom .fl-langs{display:flex; gap:16px}
+  .ft-bottom .fl-langs a:hover{color:var(--text)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1; transform:none; transition:none} html{scroll-behavior:auto} }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr; gap:48px}
+    .hero{padding:54px 0 56px}
+    .phone-stage{order:-1}
+    .lede{margin-inline:auto}
+    .hero-copy{text-align:center}
+    .hero-copy .eyebrow{margin:0 auto}
+    .cta-row{justify-content:center}
+    .trust{justify-content:center}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .nav-links{display:none}
+  }
+  @media (max-width:620px){
+    .feat-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr; gap:28px}
+    .langsw button{padding:5px 7px; font-size:12px}
+    section.block{padding:64px 0}
+    .ft-top{flex-direction:column}
+  }
 </style>
 </head>
 <body>
-<h1>LingoLink</h1>
-<p class="sub">媛쒖씤?뺣낫 泥섎━諛⑹묠 / Privacy Policy / Ch챠nh s찼ch B梳즣 m梳춗 / ?쀣꺀?ㅳ깘?룔꺖?앫꺁?룔꺖</p>
 
-<div class="lang-grid">
-  <a href="./privacy-ko.html"><span class="flag">?눖?눟</span>?쒓뎅??/a>
-  <a href="./privacy-vi.html"><span class="flag">?눤?눛</span>Ti梳퓆g Vi沼뇍</a>
-  <a href="./privacy-en.html"><span class="flag">?눣?눡</span>English</a>
-  <a href="./privacy-ja.html"><span class="flag">?눓?눝</span>?ζ쑍沃?/a>
-</div>
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="LingoLink">
+      <span class="mark">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M20 22c-6 0-10 4.5-10 10s4 10 10 10c5 0 8-3 12-10 4-7 7-10 12-10 6 0 10 4.5 10 10s-4 10-10 10c-5 0-8-3-12-10-4-7-7-10-12-10Z"
+            stroke="#fff" stroke-width="4.4" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      LingoLink
+    </a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#features" data-i18n="nav_features">기능</a>
+        <a href="#how" data-i18n="nav_how">사용법</a>
+        <a href="#download" data-i18n="nav_download">다운로드</a>
+      </nav>
+      <div class="langsw" role="group" aria-label="Language">
+        <button data-lang="ko">KO</button>
+        <button data-lang="vi">VI</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ja">JA</button>
+      </div>
+    </div>
+  </div>
+</header>
 
-<footer>
-LingoLink 쨌 com.lingolink.messenger 쨌 contact: zxc647632@gmail.com
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">4개 언어 · 실시간 번역</span></span>
+        <h1 data-i18n-html="hero_title">서로 다른 말,<br><span class="grad">같은 마음</span>으로.</h1>
+        <p class="lede" data-i18n="hero_lede">한국어·베트남어·영어·일본어를 오가는 대화. 보낸 번역을 역번역으로 한 번 더 검증해, 말의 뉘앙스까지 그대로 전합니다.</p>
+        <div class="cta-row" id="hero-cta"></div>
+        <p class="trust">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <span data-i18n="hero_trust">App Store · Google Play 정식 출시</span>
+        </p>
+      </div>
+
+      <div class="phone-stage reveal">
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <div class="scr-head">
+              <span class="scr-back">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1 1 8l7 7"/></svg>
+              </span>
+              <span class="scr-av">M</span>
+              <span>
+                <span class="scr-name">Minh</span>
+                <span class="scr-sub"><span class="live"></span><span data-i18n="demo_status">실시간 번역 중</span></span>
+              </span>
+            </div>
+            <div class="scr-body">
+              <div class="msg peer">
+                <div class="bub">Cuối tuần này bạn rảnh không?</div>
+                <div class="tr"><span class="ar">↳</span><span data-i18n="demo_p1">이번 주말에 시간 있어요?</span></div>
+              </div>
+              <div class="msg me">
+                <div class="bub" data-i18n="demo_m1">네, 토요일 오후 좋아요!</div>
+                <div class="tr"><span data-i18n="demo_m1tr">Vâng, chiều thứ Bảy được ạ!</span><span class="ar">↲</span></div>
+                <span class="verify">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span data-i18n="demo_verify">검증 완료 · 의미 일치</span>
+                </span>
+              </div>
+              <div class="msg peer">
+                <div class="bub">Tuyệt! Hẹn gặp nhé 🙂</div>
+                <div class="tr"><span class="ar">↳</span><span data-i18n="demo_p2">좋아요! 그때 봐요 🙂</span></div>
+              </div>
+            </div>
+            <div class="scr-input">
+              <span class="scr-field" data-i18n="demo_field">메시지 입력…</span>
+              <span class="scr-mic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v3"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGE STRIP -->
+  <div class="langstrip wrap">
+    <div class="row">
+      <span class="label" data-i18n="strip_label">하나의 대화, 네 개의 언어</span>
+      <span class="lpill"><span class="fl">🇰🇷</span>한국어</span>
+      <span class="lpill"><span class="fl">🇻🇳</span>Tiếng Việt</span>
+      <span class="lpill"><span class="fl">🇺🇸</span>English</span>
+      <span class="lpill"><span class="fl">🇯🇵</span>日本語</span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="block" id="features">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="feat_kicker">왜 LingoLink인가</span>
+        <h2 data-i18n="feat_title">번역을 넘어, 제대로 통하는 대화</h2>
+        <p data-i18n="feat_sub">단어만 바꾸는 번역기가 아닙니다. 의미가 정확히 건너갔는지까지 확인합니다.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="card hl reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><path d="m16 3 5 0 0 5"/><path d="M21 3 11 13"/></svg></div>
+          <h3 data-i18n="f1_t">역번역 교차검증</h3>
+          <p data-i18n="f1_d">번역한 문장을 다시 원래 언어로 되돌려, 뜻이 어긋나지 않았는지 자동으로 확인합니다. 오해 없는 대화의 핵심입니다.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
+          <h3 data-i18n="f2_t">네 개 언어, 자유롭게</h3>
+          <p data-i18n="f2_d">한국어·베트남어·영어·일본어. 나는 내 언어로 쓰고, 상대는 자기 언어로 읽습니다. 양방향 자동 번역.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.05 5A5 5 0 0 1 19 9M15.05 1A9 9 0 0 1 23 9"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
+          <h3 data-i18n="f3_t">통화도 통역됩니다</h3>
+          <p data-i18n="f3_d">음성·영상 통화 중에도 실시간으로 번역돼요. 블루투스 이어폰으로도 또렷하게 통화하세요.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v3"/></svg></div>
+          <h3 data-i18n="f4_t">말하면, 글이 됩니다</h3>
+          <p data-i18n="f4_d">타이핑 대신 말로 입력하고, 받은 메시지는 목소리로 들어보세요. 손이 바쁠 때도 대화는 이어집니다.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3 data-i18n="f5_t">쓸수록 똑똑해져요</h3>
+          <p data-i18n="f5_d">자주 쓰는 표현과 말투를 기억해, 번역이 점점 더 자연스러워집니다. 학습 데이터는 내 기기에 남습니다.</p>
+        </div>
+        <div class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></div>
+          <h3 data-i18n="f6_t">안전한 대화</h3>
+          <p data-i18n="f6_d">대화는 안전하게 보호되고, 필요한 정보만 최소한으로 다룹니다. 약관과 처리방침을 투명하게 공개합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="block how" id="how">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="how_kicker">시작은 간단하게</span>
+        <h2 data-i18n="how_title">세 단계면 충분합니다</h2>
+        <p data-i18n="how_sub">설정은 거의 없습니다. 설치하고, 추가하고, 평소처럼 보내면 됩니다.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="n">1</div>
+          <h3 data-i18n="s1_t">앱을 받고 언어 선택</h3>
+          <p data-i18n="s1_d">App Store나 Google Play에서 내려받고, 내 언어를 고르세요. 나머지는 자동입니다.</p>
+        </div>
+        <div class="step reveal">
+          <div class="n">2</div>
+          <h3 data-i18n="s2_t">친구 추가</h3>
+          <p data-i18n="s2_d">상대가 어느 나라에 있든, 어떤 언어를 쓰든 괜찮습니다. 추가만 하면 됩니다.</p>
+        </div>
+        <div class="step reveal">
+          <div class="n">3</div>
+          <h3 data-i18n="s3_t">평소처럼 대화</h3>
+          <p data-i18n="s3_d">나는 내 언어로, 상대는 자기 언어로. 메시지도 통화도 자동으로 번역됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" id="download">
+    <div class="wrap">
+      <div class="cta-card reveal">
+        <h2 data-i18n="cta_title">언어 때문에 멈추지 마세요</h2>
+        <p data-i18n="cta_sub">지금 LingoLink로 첫 대화를 시작해 보세요. 무료로 받을 수 있습니다.</p>
+        <div class="cta-row" id="cta-cta"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a class="brand" href="#top">
+          <span class="mark">
+            <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M20 22c-6 0-10 4.5-10 10s4 10 10 10c5 0 8-3 12-10 4-7 7-10 12-10 6 0 10 4.5 10 10s-4 10-10 10c-5 0-8-3-12-10-4-7-7-10-12-10Z" stroke="#fff" stroke-width="4.4" stroke-linejoin="round"/></svg>
+          </span>
+          LingoLink
+        </a>
+        <p data-i18n="ft_tagline">국경을 넘는 대화를, 오해 없이.</p>
+      </div>
+      <div class="ft-cols">
+        <div class="ft-col">
+          <h4 data-i18n="ft_product">제품</h4>
+          <a href="#features" data-i18n="nav_features">기능</a>
+          <a href="#how" data-i18n="nav_how">사용법</a>
+          <a href="#download" data-i18n="nav_download">다운로드</a>
+        </div>
+        <div class="ft-col">
+          <h4 data-i18n="ft_legal">약관·정책</h4>
+          <a href="./privacy-ko.html">개인정보처리방침 (한국어)</a>
+          <a href="./privacy-vi.html">Chính sách bảo mật (VI)</a>
+          <a href="./privacy-en.html">Privacy Policy (EN)</a>
+          <a href="./privacy-ja.html">プライバシーポリシー (JA)</a>
+        </div>
+        <div class="ft-col">
+          <h4 data-i18n="ft_support">지원</h4>
+          <a href="mailto:zxc647632@gmail.com">zxc647632@gmail.com</a>
+          <a id="ft-play" href="https://play.google.com/store/apps/details?id=com.lingolink.messenger">Google Play</a>
+          <a id="ft-apple" href="https://apps.apple.com/app/id6766298249">App Store</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© <span id="yr">2026</span> LingoLink. All rights reserved.</span>
+      <span class="fl-langs">
+        <a href="#" data-lang="ko">한국어</a>
+        <a href="#" data-lang="vi">Tiếng Việt</a>
+        <a href="#" data-lang="en">English</a>
+        <a href="#" data-lang="ja">日本語</a>
+      </span>
+    </div>
+  </div>
 </footer>
+
+<script>
+(function(){
+  var PLAY = "https://play.google.com/store/apps/details?id=com.lingolink.messenger";
+  var APPLE = "https://apps.apple.com/app/id6766298249";
+
+  var I18N = {
+    ko:{
+      doc_title:"LingoLink — 실시간 번역 메신저",
+      nav_features:"기능", nav_how:"사용법", nav_download:"다운로드",
+      hero_eyebrow:"4개 언어 · 실시간 번역",
+      hero_title:"서로 다른 말,<br><span class='grad'>같은 마음</span>으로.",
+      hero_lede:"한국어·베트남어·영어·일본어를 오가는 대화. 보낸 번역을 역번역으로 한 번 더 검증해, 말의 뉘앙스까지 그대로 전합니다.",
+      hero_trust:"App Store · Google Play 정식 출시",
+      demo_status:"실시간 번역 중", demo_p1:"이번 주말에 시간 있어요?",
+      demo_m1:"네, 토요일 오후 좋아요!", demo_m1tr:"Vâng, chiều thứ Bảy được ạ!",
+      demo_verify:"검증 완료 · 의미 일치", demo_p2:"좋아요! 그때 봐요 🙂", demo_field:"메시지 입력…",
+      strip_label:"하나의 대화, 네 개의 언어",
+      feat_kicker:"왜 LingoLink인가", feat_title:"번역을 넘어, 제대로 통하는 대화",
+      feat_sub:"단어만 바꾸는 번역기가 아닙니다. 의미가 정확히 건너갔는지까지 확인합니다.",
+      f1_t:"역번역 교차검증", f1_d:"번역한 문장을 다시 원래 언어로 되돌려, 뜻이 어긋나지 않았는지 자동으로 확인합니다. 오해 없는 대화의 핵심입니다.",
+      f2_t:"네 개 언어, 자유롭게", f2_d:"한국어·베트남어·영어·일본어. 나는 내 언어로 쓰고, 상대는 자기 언어로 읽습니다. 양방향 자동 번역.",
+      f3_t:"통화도 통역됩니다", f3_d:"음성·영상 통화 중에도 실시간으로 번역돼요. 블루투스 이어폰으로도 또렷하게 통화하세요.",
+      f4_t:"말하면, 글이 됩니다", f4_d:"타이핑 대신 말로 입력하고, 받은 메시지는 목소리로 들어보세요. 손이 바쁠 때도 대화는 이어집니다.",
+      f5_t:"쓸수록 똑똑해져요", f5_d:"자주 쓰는 표현과 말투를 기억해, 번역이 점점 더 자연스러워집니다. 학습 데이터는 내 기기에 남습니다.",
+      f6_t:"안전한 대화", f6_d:"대화는 안전하게 보호되고, 필요한 정보만 최소한으로 다룹니다. 약관과 처리방침을 투명하게 공개합니다.",
+      how_kicker:"시작은 간단하게", how_title:"세 단계면 충분합니다",
+      how_sub:"설정은 거의 없습니다. 설치하고, 추가하고, 평소처럼 보내면 됩니다.",
+      s1_t:"앱을 받고 언어 선택", s1_d:"App Store나 Google Play에서 내려받고, 내 언어를 고르세요. 나머지는 자동입니다.",
+      s2_t:"친구 추가", s2_d:"상대가 어느 나라에 있든, 어떤 언어를 쓰든 괜찮습니다. 추가만 하면 됩니다.",
+      s3_t:"평소처럼 대화", s3_d:"나는 내 언어로, 상대는 자기 언어로. 메시지도 통화도 자동으로 번역됩니다.",
+      cta_title:"언어 때문에 멈추지 마세요", cta_sub:"지금 LingoLink로 첫 대화를 시작해 보세요. 무료로 받을 수 있습니다.",
+      ft_tagline:"국경을 넘는 대화를, 오해 없이.", ft_product:"제품", ft_legal:"약관·정책", ft_support:"지원",
+      store_apple_top:"App Store에서", store_apple_main:"다운로드",
+      store_play_top:"다운로드", store_play_main:"Google Play"
+    },
+    vi:{
+      doc_title:"LingoLink — Tin nhắn dịch theo thời gian thực",
+      nav_features:"Tính năng", nav_how:"Cách dùng", nav_download:"Tải về",
+      hero_eyebrow:"4 ngôn ngữ · Dịch tức thì",
+      hero_title:"Khác tiếng nói,<br><span class='grad'>chung tấm lòng</span>.",
+      hero_lede:"Trò chuyện giữa tiếng Hàn, tiếng Việt, tiếng Anh và tiếng Nhật. Mỗi bản dịch được kiểm tra lại bằng cách dịch ngược, giữ trọn cả sắc thái câu nói.",
+      hero_trust:"Đã phát hành trên App Store và Google Play",
+      demo_status:"Đang dịch trực tiếp", demo_p1:"Cuối tuần này bạn rảnh không?",
+      demo_m1:"네, 토요일 오후 좋아요!", demo_m1tr:"Vâng, chiều thứ Bảy được ạ!",
+      demo_verify:"Đã kiểm tra · Đúng nghĩa", demo_p2:"Tuyệt! Hẹn gặp nhé 🙂", demo_field:"Nhập tin nhắn…",
+      strip_label:"Một cuộc trò chuyện, bốn ngôn ngữ",
+      feat_kicker:"Vì sao chọn LingoLink", feat_title:"Không chỉ dịch, mà thực sự hiểu nhau",
+      feat_sub:"Không phải công cụ chỉ đổi từng từ. LingoLink kiểm tra cả việc ý nghĩa có được truyền đạt đúng hay không.",
+      f1_t:"Kiểm tra bằng dịch ngược", f1_d:"Câu đã dịch được dịch ngược lại ngôn ngữ gốc để tự động xác nhận ý nghĩa không bị sai lệch. Đây là chìa khóa cho cuộc trò chuyện không hiểu lầm.",
+      f2_t:"Bốn ngôn ngữ, thoải mái", f2_d:"Hàn, Việt, Anh, Nhật. Bạn viết bằng tiếng của mình, người kia đọc bằng tiếng của họ. Dịch tự động hai chiều.",
+      f3_t:"Dịch cả khi gọi điện", f3_d:"Cuộc gọi thoại và video cũng được dịch theo thời gian thực. Nghe rõ ràng ngay cả khi dùng tai nghe Bluetooth.",
+      f4_t:"Nói ra, thành chữ", f4_d:"Nhập bằng giọng nói thay vì gõ phím, và nghe tin nhắn nhận được bằng âm thanh. Trò chuyện vẫn tiếp tục khi tay bạn bận.",
+      f5_t:"Càng dùng càng thông minh", f5_d:"Ghi nhớ những cách nói bạn hay dùng để bản dịch ngày càng tự nhiên hơn. Dữ liệu học được lưu trên thiết bị của bạn.",
+      f6_t:"Trò chuyện an toàn", f6_d:"Cuộc trò chuyện được bảo vệ an toàn, chỉ xử lý thông tin tối thiểu cần thiết. Điều khoản và chính sách được công khai minh bạch.",
+      how_kicker:"Bắt đầu thật đơn giản", how_title:"Chỉ cần ba bước",
+      how_sub:"Gần như không cần cài đặt gì. Tải về, thêm bạn, rồi nhắn như bình thường.",
+      s1_t:"Tải app và chọn ngôn ngữ", s1_d:"Tải từ App Store hoặc Google Play và chọn ngôn ngữ của bạn. Phần còn lại là tự động.",
+      s2_t:"Thêm bạn bè", s2_d:"Dù người kia ở quốc gia nào, dùng ngôn ngữ gì cũng được. Chỉ cần thêm vào.",
+      s3_t:"Trò chuyện như thường", s3_d:"Bạn dùng tiếng của mình, người kia dùng tiếng của họ. Cả tin nhắn lẫn cuộc gọi đều được dịch tự động.",
+      cta_title:"Đừng để ngôn ngữ cản bước", cta_sub:"Bắt đầu cuộc trò chuyện đầu tiên với LingoLink ngay hôm nay. Tải về miễn phí.",
+      ft_tagline:"Trò chuyện vượt biên giới, không còn hiểu lầm.", ft_product:"Sản phẩm", ft_legal:"Điều khoản & Chính sách", ft_support:"Hỗ trợ",
+      store_apple_top:"Tải trên", store_apple_main:"App Store",
+      store_play_top:"Tải về từ", store_play_main:"Google Play"
+    },
+    en:{
+      doc_title:"LingoLink — Real-time Translation Messenger",
+      nav_features:"Features", nav_how:"How it works", nav_download:"Download",
+      hero_eyebrow:"4 languages · Real-time translation",
+      hero_title:"Different words,<br><span class='grad'>same meaning</span>.",
+      hero_lede:"Chat across Korean, Vietnamese, English and Japanese. Every translation is back-translated and verified, so even the nuance comes through intact.",
+      hero_trust:"Available on the App Store and Google Play",
+      demo_status:"Translating live", demo_p1:"Are you free this weekend?",
+      demo_m1:"네, 토요일 오후 좋아요!", demo_m1tr:"Vâng, chiều thứ Bảy được ạ!",
+      demo_verify:"Verified · meaning matches", demo_p2:"Great! See you then 🙂", demo_field:"Type a message…",
+      strip_label:"One conversation, four languages",
+      feat_kicker:"Why LingoLink", feat_title:"Beyond translation — truly understood",
+      feat_sub:"Not just a word swapper. LingoLink checks that the meaning actually made it across.",
+      f1_t:"Back-translation check", f1_d:"Each translated sentence is translated back to the original language to automatically confirm the meaning held. This is the heart of misunderstanding-free conversation.",
+      f2_t:"Four languages, freely", f2_d:"Korean, Vietnamese, English, Japanese. You write in your language, they read in theirs. Automatic, both ways.",
+      f3_t:"Calls are translated too", f3_d:"Voice and video calls are translated in real time. Crystal-clear even over Bluetooth earbuds.",
+      f4_t:"Speak, and it becomes text", f4_d:"Talk instead of type, and hear incoming messages read aloud. The conversation keeps going even when your hands are full.",
+      f5_t:"Smarter the more you use it", f5_d:"It remembers your common phrases and tone, so translations grow more natural over time. Learning data stays on your device.",
+      f6_t:"Private by design", f6_d:"Conversations are kept secure and only the minimum information is handled. Terms and policy are published transparently.",
+      how_kicker:"Simple to start", how_title:"Three steps is all it takes",
+      how_sub:"Almost nothing to set up. Install, add a friend, and message like always.",
+      s1_t:"Get the app, pick a language", s1_d:"Download from the App Store or Google Play and choose your language. The rest is automatic.",
+      s2_t:"Add a friend", s2_d:"It doesn't matter what country they're in or what language they speak. Just add them.",
+      s3_t:"Chat like always", s3_d:"You in your language, them in theirs. Messages and calls are translated automatically.",
+      cta_title:"Don't let language stop you", cta_sub:"Start your first conversation on LingoLink today. Free to download.",
+      ft_tagline:"Conversations across borders, without the misunderstandings.", ft_product:"Product", ft_legal:"Legal", ft_support:"Support",
+      store_apple_top:"Download on the", store_apple_main:"App Store",
+      store_play_top:"GET IT ON", store_play_main:"Google Play"
+    },
+    ja:{
+      doc_title:"LingoLink — リアルタイム翻訳メッセンジャー",
+      nav_features:"機能", nav_how:"使い方", nav_download:"ダウンロード",
+      hero_eyebrow:"4言語 · リアルタイム翻訳",
+      hero_title:"言葉は違っても、<br><span class='grad'>同じ気持ち</span>を。",
+      hero_lede:"韓国語・ベトナム語・英語・日本語をまたぐ会話。送った翻訳を逆翻訳でもう一度検証し、言葉のニュアンスまでそのまま届けます。",
+      hero_trust:"App Store・Google Play で配信中",
+      demo_status:"リアルタイム翻訳中", demo_p1:"今週末、時間ありますか？",
+      demo_m1:"네, 토요일 오후 좋아요!", demo_m1tr:"Vâng, chiều thứ Bảy được ạ!",
+      demo_verify:"検証済み · 意味が一致", demo_p2:"いいですね！その時に会いましょう 🙂", demo_field:"メッセージを入力…",
+      strip_label:"ひとつの会話を、4つの言語で",
+      feat_kicker:"LingoLink を選ぶ理由", feat_title:"翻訳のその先へ、ちゃんと伝わる会話",
+      feat_sub:"単語を置き換えるだけの翻訳ではありません。意味が正しく伝わったかまで確認します。",
+      f1_t:"逆翻訳によるクロスチェック", f1_d:"翻訳した文をもう一度元の言語に戻し、意味がずれていないかを自動で確認します。誤解のない会話の要です。",
+      f2_t:"4言語を、自由に", f2_d:"韓国語・ベトナム語・英語・日本語。自分は自分の言語で書き、相手は相手の言語で読む。双方向の自動翻訳。",
+      f3_t:"通話も翻訳されます", f3_d:"音声・ビデオ通話中もリアルタイムで翻訳。Bluetoothイヤホンでもクリアに通話できます。",
+      f4_t:"話せば、文字になる", f4_d:"入力の代わりに話しかけ、届いたメッセージは音声で聞けます。手がふさがっていても会話は続きます。",
+      f5_t:"使うほど賢くなる", f5_d:"よく使う表現や話し方を覚え、翻訳がどんどん自然になります。学習データは端末内に保存されます。",
+      f6_t:"安心して話せる", f6_d:"会話は安全に守られ、必要最小限の情報だけを扱います。規約とポリシーを透明に公開しています。",
+      how_kicker:"始め方はかんたん", how_title:"3ステップで十分です",
+      how_sub:"設定はほとんどありません。入れて、追加して、いつも通り送るだけ。",
+      s1_t:"アプリを入れて言語を選択", s1_d:"App Store または Google Play からダウンロードし、自分の言語を選びます。あとは自動です。",
+      s2_t:"友だちを追加", s2_d:"相手がどの国にいても、どの言語を使っていても大丈夫。追加するだけです。",
+      s3_t:"いつも通り会話", s3_d:"自分は自分の言語で、相手は相手の言語で。メッセージも通話も自動で翻訳されます。",
+      cta_title:"言葉のせいで、止まらないで", cta_sub:"今すぐ LingoLink で最初の会話を。無料でダウンロードできます。",
+      ft_tagline:"国境を越える会話を、誤解なく。", ft_product:"製品", ft_legal:"規約・ポリシー", ft_support:"サポート",
+      store_apple_top:"ダウンロード", store_apple_main:"App Store",
+      store_play_top:"今すぐ入手", store_play_main:"Google Play"
+    }
+  };
+
+  var appleSVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 1.43c.06 1.04-.36 2.06-1.02 2.81-.7.79-1.86 1.41-2.98 1.32-.08-1 .4-2.04 1.04-2.74.71-.8 1.95-1.39 2.96-1.39ZM19.5 17.2c-.52 1.2-.77 1.73-1.44 2.79-.93 1.48-2.25 3.32-3.88 3.34-1.45.01-1.82-.94-3.78-.93-1.96.01-2.37.95-3.82.94-1.63-.02-2.88-1.69-3.81-3.16C-.27 16.1-.55 11.3 1.06 8.74 2.2 6.93 4 5.86 5.7 5.86c1.72 0 2.81 1 4.24 1 1.38 0 2.22-1 4.22-1 1.51 0 3.12.83 4.26 2.25-3.75 2.05-3.14 7.4 1.08 9.09Z"/></svg>';
+  var playSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00e1ff" d="M3.2 1.6 13.3 12 3.2 22.4c-.5-.2-.8-.7-.8-1.4V3c0-.7.3-1.2.8-1.4Z"/><path fill="#ffd400" d="m17.3 8 3.4 1.9c1 .6 1 2.2 0 2.8L17.3 16 13.8 12 17.3 8Z"/><path fill="#ff3d44" d="M3.2 1.6c.4-.2.9-.1 1.4.2l12.7 6.2L13.8 12 3.2 1.6Z"/><path fill="#00d860" d="M3.2 22.4 13.8 12l3.5 4-12.7 6.2c-.5.3-1 .4-1.4.2Z"/></svg>';
+
+  function storeBadge(href, topKey, mainKey, dict, svg){
+    return '<a class="store" href="'+href+'" target="_blank" rel="noopener">'+svg+
+      '<span><span class="s-top">'+dict[topKey]+'</span><span class="s-main">'+dict[mainKey]+'</span></span></a>';
+  }
+
+  function renderStores(dict){
+    var html = storeBadge(APPLE,"store_apple_top","store_apple_main",dict,appleSVG)+
+               storeBadge(PLAY,"store_play_top","store_play_main",dict,playSVG);
+    document.getElementById("hero-cta").innerHTML = html;
+    document.getElementById("cta-cta").innerHTML = html;
+  }
+
+  function apply(lang){
+    var dict = I18N[lang] || I18N.en;
+    document.documentElement.lang = lang;
+    document.title = dict.doc_title;
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      var k = el.getAttribute("data-i18n"); if(dict[k]!=null) el.textContent = dict[k];
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(function(el){
+      var k = el.getAttribute("data-i18n-html"); if(dict[k]!=null) el.innerHTML = dict[k];
+    });
+    renderStores(dict);
+    document.querySelectorAll(".langsw button").forEach(function(b){
+      b.classList.toggle("active", b.getAttribute("data-lang")===lang);
+    });
+    try{ localStorage.setItem("ll_lang", lang); }catch(e){}
+  }
+
+  function pickLang(){
+    var sup = ["ko","vi","en","ja"];
+    try{
+      var q = new URLSearchParams(location.search).get("lang");
+      if(q && sup.indexOf(q)>=0) return q;
+      var saved = localStorage.getItem("ll_lang");
+      if(saved && sup.indexOf(saved)>=0) return saved;
+    }catch(e){}
+    var navs = (navigator.languages || [navigator.language || "en"]);
+    for(var i=0;i<navs.length;i++){
+      var code = (navs[i]||"").slice(0,2).toLowerCase();
+      if(sup.indexOf(code)>=0) return code;
+    }
+    return "en";
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(function(el){
+    el.addEventListener("click", function(e){
+      if(el.tagName==="A") e.preventDefault();
+      apply(el.getAttribute("data-lang"));
+    });
+  });
+
+  apply(pickLang());
+
+  // header shadow on scroll
+  var hdr = document.getElementById("hdr");
+  function onScroll(){ hdr.classList.toggle("scrolled", window.scrollY > 8); }
+  onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+
+  // reveal on scroll
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, {threshold:0.12, rootMargin:"0px 0px -8% 0px"});
+    document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+  }
+})();
+</script>
 </body>
 </html>
