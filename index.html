@@ -37,17 +37,26 @@
     --grad-a:#0A84FF; --grad-b:#8A5CFF; --brand:#4D6AF7; --brand-ink:#3A52D8;
     --bg:#ffffff; --bg-soft:#f6f7fb; --surface:#ffffff; --surface-2:#f2f4fa;
     --border:#e7e9f2; --text:#0e1116; --text-dim:#5b6472; --text-mute:#8a93a3;
+    --eyebrow-fg:#3A52D8; --store-bg:#0c0d12; --store-border:rgba(255,255,255,.08); --langsw-active:#ffffff;
     --shadow:0 1px 2px rgba(16,22,40,.04),0 12px 32px rgba(16,22,40,.08);
     --shadow-lg:0 30px 80px rgba(40,52,120,.22);
     --radius:16px; --maxw:1120px;
     color-scheme:light dark;
   }
+  :root[data-theme="dark"]{
+    --bg:#0a0b10; --bg-soft:#0e1018; --surface:#13161f; --surface-2:#171b26;
+    --border:#222637; --text:#eef1f7; --text-dim:#a4adbe; --text-mute:#727b8e;
+    --eyebrow-fg:#aab8ff; --store-bg:#1b1f2b; --store-border:#2a3042; --langsw-active:#272c3b;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.5);
+    --shadow-lg:0 36px 90px rgba(0,0,0,.6); color-scheme:dark;
+  }
   @media (prefers-color-scheme:dark){
-    :root{
+    :root:not([data-theme="light"]){
       --bg:#0a0b10; --bg-soft:#0e1018; --surface:#13161f; --surface-2:#171b26;
       --border:#222637; --text:#eef1f7; --text-dim:#a4adbe; --text-mute:#727b8e;
+      --eyebrow-fg:#aab8ff; --store-bg:#1b1f2b; --store-border:#2a3042; --langsw-active:#272c3b;
       --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 40px rgba(0,0,0,.5);
-      --shadow-lg:0 36px 90px rgba(0,0,0,.6);
+      --shadow-lg:0 36px 90px rgba(0,0,0,.6); color-scheme:dark;
     }
   }
   *{box-sizing:border-box}
@@ -80,8 +89,14 @@
     border-radius:999px}
   .langsw button{border:0; background:transparent; color:var(--text-dim); font:inherit; font-size:12.5px;
     font-weight:600; padding:5px 9px; border-radius:999px; cursor:pointer; letter-spacing:.02em; transition:.15s}
-  .langsw button.active{background:var(--surface); color:var(--text); box-shadow:0 1px 2px rgba(0,0,0,.08)}
-  @media (prefers-color-scheme:dark){ .langsw button.active{background:#272c3b} }
+  .langsw button.active{background:var(--langsw-active); color:var(--text); box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .iconbtn{width:34px; height:34px; border-radius:10px; border:1px solid var(--border); background:var(--surface-2);
+    color:var(--text-dim); display:grid; place-items:center; cursor:pointer; transition:.15s; flex:none}
+  .iconbtn:hover{color:var(--text); border-color:var(--text-mute)}
+  .iconbtn svg{width:17px; height:17px}
+  .iconbtn .sun{display:none} .iconbtn .moon{display:block}
+  :root[data-theme="dark"] .iconbtn .sun{display:block} :root[data-theme="dark"] .iconbtn .moon{display:none}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .iconbtn .sun{display:block} :root:not([data-theme="light"]) .iconbtn .moon{display:none} }
   .btn{display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:14.5px; cursor:pointer;
     border-radius:11px; padding:10px 18px; border:1px solid transparent; transition:transform .12s ease, box-shadow .2s, background .2s}
   .btn-primary{background:linear-gradient(120deg,var(--grad-a),var(--grad-b)); color:#fff;
@@ -97,18 +112,16 @@
       radial-gradient(55% 45% at 10% 0%, rgba(10,132,255,.14), transparent 60%);
   }
   .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center}
-  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--brand-ink);
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--eyebrow-fg);
     background:color-mix(in srgb,var(--brand) 12%, transparent); border:1px solid color-mix(in srgb,var(--brand) 24%, transparent);
     padding:6px 13px; border-radius:999px; letter-spacing:.01em}
-  @media (prefers-color-scheme:dark){ .eyebrow{color:#aab8ff} }
   .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:linear-gradient(var(--grad-a),var(--grad-b))}
   h1{font-size:clamp(34px,5vw,56px); line-height:1.08; letter-spacing:-.035em; margin:22px 0 18px; font-weight:780}
   .lede{font-size:clamp(16px,1.6vw,19px); color:var(--text-dim); max-width:30em; margin:0 0 30px}
   .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
-  .store{display:inline-flex; align-items:center; gap:11px; background:#0c0d12; color:#fff; border-radius:13px;
-    padding:11px 18px; transition:transform .12s ease, box-shadow .2s; border:1px solid rgba(255,255,255,.08)}
+  .store{display:inline-flex; align-items:center; gap:11px; background:var(--store-bg); color:#fff; border-radius:13px;
+    padding:11px 18px; transition:transform .12s ease, box-shadow .2s; border:1px solid var(--store-border)}
   .store:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(0,0,0,.25)}
-  @media (prefers-color-scheme:dark){ .store{background:#1b1f2b; border-color:#2a3042} }
   .store svg{width:25px; height:25px; flex:none}
   .store .s-top{font-size:10.5px; opacity:.78; line-height:1.2; letter-spacing:.02em}
   .store .s-main{font-size:16px; font-weight:600; line-height:1.15; letter-spacing:-.01em}
@@ -221,7 +234,71 @@
   /* ---------- reveal ---------- */
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
   .reveal.in{opacity:1; transform:none}
-  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1; transform:none; transition:none} html{scroll-behavior:auto} }
+
+  /* ---------- logo draw-in ---------- */
+  .brand .mark svg path{stroke-dasharray:300; stroke-dashoffset:300; animation:draw 1.6s cubic-bezier(.6,.05,.2,1) .15s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* ---------- hero aura + grain ---------- */
+  .aura{position:absolute; z-index:-1; border-radius:50%; filter:blur(60px); opacity:.5;
+    background:radial-gradient(circle at 30% 30%, var(--grad-b), transparent 70%); pointer-events:none}
+  .aura.a1{width:420px; height:420px; top:-120px; right:-60px; animation:float1 16s ease-in-out infinite}
+  .aura.a2{width:360px; height:360px; bottom:-140px; left:-80px; opacity:.4;
+    background:radial-gradient(circle at 30% 30%, var(--grad-a), transparent 70%); animation:float2 19s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-26px,30px) scale(1.08)}}
+  @keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-24px) scale(1.1)}}
+  .hero::after{content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; opacity:.5; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+
+  /* ---------- animated chat ---------- */
+  .scr-body .msg, .scr-body .typing{opacity:0; transform:translateY(8px)}
+  .scr-body .msg.show, .scr-body .typing.show{opacity:1; transform:none; transition:opacity .4s ease, transform .4s ease}
+  .scr-body .verify{opacity:0; transform:scale(.85); transform-origin:left center; transition:opacity .35s ease, transform .35s ease}
+  .msg.me .verify{transform-origin:right center}
+  .scr-body .verify.show{opacity:1; transform:none}
+  .typing{align-self:flex-start; background:#fff; padding:11px 14px; border-radius:16px; border-bottom-left-radius:5px;
+    display:flex; gap:4px; box-shadow:0 1px 1px rgba(16,22,40,.05); width:fit-content}
+  .typing i{width:6px; height:6px; border-radius:50%; background:#b7c0d0; display:block; animation:blink 1.2s infinite}
+  .typing i:nth-child(2){animation-delay:.2s} .typing i:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,60%,100%{opacity:.3; transform:translateY(0)}30%{opacity:1; transform:translateY(-3px)}}
+
+  /* ---------- greeting marquee ---------- */
+  .marquee{overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .marquee .track{display:flex; gap:48px; width:max-content; animation:scroll 28s linear infinite}
+  .marquee:hover .track{animation-play-state:paused}
+  .marquee .g{display:inline-flex; align-items:center; gap:11px; font-size:20px; font-weight:650; color:var(--text-dim); white-space:nowrap; letter-spacing:-.01em}
+  .marquee .g .fl{font-size:22px}
+  .marquee .g .sep{color:var(--brand); opacity:.5; font-weight:400}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- card glow ---------- */
+  .card::after{content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none;
+    background:linear-gradient(135deg,var(--grad-a),var(--grad-b)); opacity:0; transition:opacity .3s;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude}
+  .card:not(.hl):hover::after{opacity:.6}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px}
+  .qa{border:1px solid var(--border); border-radius:14px; background:var(--surface); overflow:hidden; transition:border-color .2s}
+  .qa[open]{border-color:color-mix(in srgb,var(--brand) 40%, var(--border))}
+  .qa summary{list-style:none; cursor:pointer; padding:20px 22px; font-size:16.5px; font-weight:650; letter-spacing:-.01em;
+    display:flex; align-items:center; justify-content:space-between; gap:16px}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary .pl{width:20px; height:20px; flex:none; position:relative; transition:transform .25s}
+  .qa summary .pl::before,.qa summary .pl::after{content:""; position:absolute; background:var(--brand); border-radius:2px}
+  .qa summary .pl::before{top:9px; left:2px; width:16px; height:2px}
+  .qa summary .pl::after{top:2px; left:9px; width:2px; height:16px; transition:opacity .25s}
+  .qa[open] summary .pl{transform:rotate(90deg)} .qa[open] summary .pl::after{opacity:0}
+  .qa .ans{padding:0 22px 20px; color:var(--text-dim); font-size:15px; line-height:1.65; margin:0}
+
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1; transform:none; transition:none} html{scroll-behavior:auto}
+    .brand .mark svg path{stroke-dashoffset:0; animation:none}
+    .aura{animation:none!important} .typing i{animation:none} .marquee .track{animation:none}
+    .scr-body .msg,.scr-body .typing,.scr-body .verify{opacity:1; transform:none}
+  }
 
   /* ---------- responsive ---------- */
   @media (max-width:920px){
@@ -244,6 +321,10 @@
     .ft-top{flex-direction:column}
   }
 </style>
+<script>
+  // anti-FOUC: apply saved theme before first paint
+  try{ var t=localStorage.getItem("ll_theme"); if(t==="dark"||t==="light") document.documentElement.setAttribute("data-theme",t); }catch(e){}
+</script>
 </head>
 <body>
 
@@ -262,6 +343,7 @@
       <nav class="nav-links">
         <a href="#features" data-i18n="nav_features">기능</a>
         <a href="#how" data-i18n="nav_how">사용법</a>
+        <a href="#faq" data-i18n="faq_kicker">자주 묻는 질문</a>
         <a href="#download" data-i18n="nav_download">다운로드</a>
       </nav>
       <div class="langsw" role="group" aria-label="Language">
@@ -270,6 +352,10 @@
         <button data-lang="en">EN</button>
         <button data-lang="ja">JA</button>
       </div>
+      <button class="iconbtn" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -278,6 +364,8 @@
 
   <!-- HERO -->
   <section class="hero">
+    <span class="aura a1" aria-hidden="true"></span>
+    <span class="aura a2" aria-hidden="true"></span>
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
         <span class="eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">4개 언어 · 실시간 번역</span></span>
@@ -304,7 +392,7 @@
                 <span class="scr-sub"><span class="live"></span><span data-i18n="demo_status">실시간 번역 중</span></span>
               </span>
             </div>
-            <div class="scr-body">
+            <div class="scr-body" id="chat-body">
               <div class="msg peer">
                 <div class="bub">Cuối tuần này bạn rảnh không?</div>
                 <div class="tr"><span class="ar">↳</span><span data-i18n="demo_p1">이번 주말에 시간 있어요?</span></div>
@@ -334,14 +422,11 @@
     </div>
   </section>
 
-  <!-- LANGUAGE STRIP -->
-  <div class="langstrip wrap">
-    <div class="row">
-      <span class="label" data-i18n="strip_label">하나의 대화, 네 개의 언어</span>
-      <span class="lpill"><span class="fl">🇰🇷</span>한국어</span>
-      <span class="lpill"><span class="fl">🇻🇳</span>Tiếng Việt</span>
-      <span class="lpill"><span class="fl">🇺🇸</span>English</span>
-      <span class="lpill"><span class="fl">🇯🇵</span>日本語</span>
+  <!-- GREETING MARQUEE -->
+  <div class="langstrip">
+    <div class="label wrap" data-i18n="strip_label" style="text-align:center">하나의 대화, 네 개의 언어</div>
+    <div class="marquee" aria-hidden="true">
+      <div class="track" id="mq-track"></div>
     </div>
   </div>
 
@@ -416,6 +501,38 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="block" id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker" data-i18n="faq_kicker">자주 묻는 질문</span>
+        <h2 data-i18n="faq_title">궁금한 점이 있나요?</h2>
+      </div>
+      <div class="faq reveal">
+        <details class="qa">
+          <summary><span data-i18n="q1">번역은 정말 정확한가요?</span><span class="pl"></span></summary>
+          <p class="ans" data-i18n="a1">보낸 문장을 다시 원래 언어로 역번역해 의미가 어긋나지 않았는지 한 번 더 확인합니다. 단순 단어 치환을 넘어 문맥과 뉘앙스를 검증하는 방식입니다.</p>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="q2">어떤 언어를 지원하나요?</span><span class="pl"></span></summary>
+          <p class="ans" data-i18n="a2">현재 한국어·베트남어·영어·일본어를 지원합니다. 나는 내 언어로, 상대는 상대의 언어로 대화하면 자동으로 양방향 번역됩니다.</p>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="q3">통화 중에도 번역되나요?</span><span class="pl"></span></summary>
+          <p class="ans" data-i18n="a3">네. 음성·영상 통화 중에도 실시간으로 번역됩니다. 블루투스 이어폰을 연결해도 또렷하게 통화할 수 있습니다.</p>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="q4">요금이 있나요?</span><span class="pl"></span></summary>
+          <p class="ans" data-i18n="a4">앱은 App Store와 Google Play에서 무료로 내려받을 수 있습니다. 지금 바로 시작해 보세요.</p>
+        </details>
+        <details class="qa">
+          <summary><span data-i18n="q5">대화 내용은 안전한가요?</span><span class="pl"></span></summary>
+          <p class="ans" data-i18n="a5">대화는 안전하게 보호되며, 서비스 운영에 필요한 최소한의 정보만 다룹니다. 자세한 내용은 하단의 개인정보처리방침에서 확인할 수 있습니다.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-band" id="download">
     <div class="wrap">
@@ -446,6 +563,7 @@
           <h4 data-i18n="ft_product">제품</h4>
           <a href="#features" data-i18n="nav_features">기능</a>
           <a href="#how" data-i18n="nav_how">사용법</a>
+          <a href="#faq" data-i18n="faq_kicker">자주 묻는 질문</a>
           <a href="#download" data-i18n="nav_download">다운로드</a>
         </div>
         <div class="ft-col">
@@ -508,7 +626,13 @@
       cta_title:"언어 때문에 멈추지 마세요", cta_sub:"지금 LingoLink로 첫 대화를 시작해 보세요. 무료로 받을 수 있습니다.",
       ft_tagline:"국경을 넘는 대화를, 오해 없이.", ft_product:"제품", ft_legal:"약관·정책", ft_support:"지원",
       store_apple_top:"App Store에서", store_apple_main:"다운로드",
-      store_play_top:"다운로드", store_play_main:"Google Play"
+      store_play_top:"다운로드", store_play_main:"Google Play",
+      faq_kicker:"자주 묻는 질문", faq_title:"궁금한 점이 있나요?",
+      q1:"번역은 정말 정확한가요?", a1:"보낸 문장을 다시 원래 언어로 역번역해 의미가 어긋나지 않았는지 한 번 더 확인합니다. 단순 단어 치환을 넘어 문맥과 뉘앙스를 검증하는 방식입니다.",
+      q2:"어떤 언어를 지원하나요?", a2:"현재 한국어·베트남어·영어·일본어를 지원합니다. 나는 내 언어로, 상대는 상대의 언어로 대화하면 자동으로 양방향 번역됩니다.",
+      q3:"통화 중에도 번역되나요?", a3:"네. 음성·영상 통화 중에도 실시간으로 번역됩니다. 블루투스 이어폰을 연결해도 또렷하게 통화할 수 있습니다.",
+      q4:"요금이 있나요?", a4:"앱은 App Store와 Google Play에서 무료로 내려받을 수 있습니다. 지금 바로 시작해 보세요.",
+      q5:"대화 내용은 안전한가요?", a5:"대화는 안전하게 보호되며, 서비스 운영에 필요한 최소한의 정보만 다룹니다. 자세한 내용은 하단의 개인정보처리방침에서 확인할 수 있습니다."
     },
     vi:{
       doc_title:"LingoLink — Tin nhắn dịch theo thời gian thực",
@@ -537,7 +661,13 @@
       cta_title:"Đừng để ngôn ngữ cản bước", cta_sub:"Bắt đầu cuộc trò chuyện đầu tiên với LingoLink ngay hôm nay. Tải về miễn phí.",
       ft_tagline:"Trò chuyện vượt biên giới, không còn hiểu lầm.", ft_product:"Sản phẩm", ft_legal:"Điều khoản & Chính sách", ft_support:"Hỗ trợ",
       store_apple_top:"Tải trên", store_apple_main:"App Store",
-      store_play_top:"Tải về từ", store_play_main:"Google Play"
+      store_play_top:"Tải về từ", store_play_main:"Google Play",
+      faq_kicker:"Câu hỏi thường gặp", faq_title:"Bạn có thắc mắc gì không?",
+      q1:"Bản dịch có thực sự chính xác không?", a1:"Câu bạn gửi được dịch ngược lại ngôn ngữ gốc để kiểm tra xem ý nghĩa có bị sai lệch hay không. Không chỉ thay từng từ, mà còn xác minh cả ngữ cảnh và sắc thái.",
+      q2:"Hỗ trợ những ngôn ngữ nào?", a2:"Hiện hỗ trợ tiếng Hàn, tiếng Việt, tiếng Anh và tiếng Nhật. Bạn dùng tiếng của mình, người kia dùng tiếng của họ — dịch tự động hai chiều.",
+      q3:"Cuộc gọi có được dịch không?", a3:"Có. Cuộc gọi thoại và video cũng được dịch theo thời gian thực. Nghe rõ ràng ngay cả khi dùng tai nghe Bluetooth.",
+      q4:"Có mất phí không?", a4:"Ứng dụng được tải miễn phí trên App Store và Google Play. Hãy bắt đầu ngay hôm nay.",
+      q5:"Nội dung trò chuyện có an toàn không?", a5:"Cuộc trò chuyện được bảo vệ an toàn và chỉ xử lý thông tin tối thiểu cần thiết. Xem thêm tại Chính sách bảo mật ở cuối trang."
     },
     en:{
       doc_title:"LingoLink — Real-time Translation Messenger",
@@ -566,7 +696,13 @@
       cta_title:"Don't let language stop you", cta_sub:"Start your first conversation on LingoLink today. Free to download.",
       ft_tagline:"Conversations across borders, without the misunderstandings.", ft_product:"Product", ft_legal:"Legal", ft_support:"Support",
       store_apple_top:"Download on the", store_apple_main:"App Store",
-      store_play_top:"GET IT ON", store_play_main:"Google Play"
+      store_play_top:"GET IT ON", store_play_main:"Google Play",
+      faq_kicker:"FAQ", faq_title:"Got a question?",
+      q1:"Are the translations really accurate?", a1:"Each sentence you send is translated back into the original language to double-check the meaning held. It verifies context and nuance, not just word-for-word swaps.",
+      q2:"Which languages are supported?", a2:"Korean, Vietnamese, English and Japanese for now. You write in your language and the other person reads in theirs — translated automatically, both ways.",
+      q3:"Are calls translated too?", a3:"Yes. Voice and video calls are translated in real time, and stay crystal-clear even over Bluetooth earbuds.",
+      q4:"Is there a fee?", a4:"The app is free to download on the App Store and Google Play. Start your first conversation today.",
+      q5:"Are my conversations private?", a5:"Conversations are kept secure and only the minimum information needed to run the service is handled. See the Privacy Policy at the bottom of the page for details."
     },
     ja:{
       doc_title:"LingoLink — リアルタイム翻訳メッセンジャー",
@@ -595,7 +731,13 @@
       cta_title:"言葉のせいで、止まらないで", cta_sub:"今すぐ LingoLink で最初の会話を。無料でダウンロードできます。",
       ft_tagline:"国境を越える会話を、誤解なく。", ft_product:"製品", ft_legal:"規約・ポリシー", ft_support:"サポート",
       store_apple_top:"ダウンロード", store_apple_main:"App Store",
-      store_play_top:"今すぐ入手", store_play_main:"Google Play"
+      store_play_top:"今すぐ入手", store_play_main:"Google Play",
+      faq_kicker:"よくある質問", faq_title:"気になることはありますか？",
+      q1:"翻訳は本当に正確ですか？", a1:"送った文をもう一度元の言語に逆翻訳し、意味がずれていないかを確認します。単なる単語の置き換えではなく、文脈やニュアンスまで検証します。",
+      q2:"対応している言語は？", a2:"現在、韓国語・ベトナム語・英語・日本語に対応しています。自分は自分の言語で、相手は相手の言語で——双方向に自動翻訳されます。",
+      q3:"通話中も翻訳されますか？", a3:"はい。音声・ビデオ通話中もリアルタイムで翻訳されます。Bluetoothイヤホンでもクリアに通話できます。",
+      q4:"料金はかかりますか？", a4:"アプリは App Store と Google Play から無料でダウンロードできます。今すぐ始めてみてください。",
+      q5:"会話の内容は安全ですか？", a5:"会話は安全に保護され、サービス運営に必要な最小限の情報のみを扱います。詳しくはページ下部のプライバシーポリシーをご覧ください。"
     }
   };
 
@@ -670,6 +812,74 @@
   } else {
     document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
   }
+
+  // theme toggle (manual override of system preference)
+  var toggle = document.getElementById("theme-toggle");
+  function currentTheme(){
+    var a = document.documentElement.getAttribute("data-theme");
+    if(a) return a;
+    return (window.matchMedia && matchMedia("(prefers-color-scheme:dark)").matches) ? "dark" : "light";
+  }
+  if(toggle){
+    toggle.addEventListener("click", function(){
+      var next = currentTheme()==="dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try{ localStorage.setItem("ll_theme", next); }catch(e){}
+    });
+  }
+
+  // greeting marquee
+  (function(){
+    var track = document.getElementById("mq-track");
+    if(!track) return;
+    var greet = [
+      {fl:"🇰🇷", t:"안녕하세요"}, {fl:"🇻🇳", t:"Xin chào"},
+      {fl:"🇺🇸", t:"Hello"}, {fl:"🇯🇵", t:"こんにちは"}
+    ];
+    var seq = greet.map(function(g){
+      return '<span class="g"><span class="fl">'+g.fl+'</span>'+g.t+'</span><span class="g sep">∞</span>';
+    }).join("");
+    track.innerHTML = seq + seq; // duplicate for seamless -50% loop
+  })();
+
+  // animated chat playthrough
+  var chatTimers = [];
+  function cst(fn,d){ var id=setTimeout(fn,d); chatTimers.push(id); return id; }
+  function animateChat(){
+    var body = document.getElementById("chat-body");
+    if(!body) return;
+    chatTimers.forEach(clearTimeout); chatTimers = [];
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion:reduce)").matches;
+    var msgs = [].slice.call(body.querySelectorAll(".msg"));
+    msgs.forEach(function(m){ m.classList.remove("show"); var v=m.querySelector(".verify"); if(v) v.classList.remove("show"); });
+    var typing = body.querySelector(".typing");
+    if(!typing){ typing=document.createElement("div"); typing.className="typing"; typing.innerHTML="<i></i><i></i><i></i>"; }
+    if(typing.parentNode) typing.parentNode.removeChild(typing);
+    if(reduce){
+      msgs.forEach(function(m){ m.classList.add("show"); var v=m.querySelector(".verify"); if(v) v.classList.add("show"); });
+      return;
+    }
+    var i=0;
+    function next(){
+      if(i>=msgs.length) return;
+      var m=msgs[i], isPeer=m.classList.contains("peer");
+      function reveal(){
+        if(typing.parentNode) typing.parentNode.removeChild(typing);
+        m.classList.add("show");
+        var v=m.querySelector(".verify");
+        if(v) cst(function(){ v.classList.add("show"); }, 520);
+        i++; cst(next, 760);
+      }
+      if(isPeer){
+        body.insertBefore(typing, m); typing.classList.add("show");
+        cst(function(){ typing.classList.remove("show"); cst(reveal, 180); }, 920);
+      } else {
+        cst(reveal, 560);
+      }
+    }
+    cst(next, 650);
+  }
+  animateChat();
 })();
 </script>
 </body>
